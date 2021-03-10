@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="character.cpp" />
-    <ClCompile Include="gameConfig.cpp" />
     <ClCompile Include="host\FolderWatcher-win.cpp">
       <Filter>host</Filter>
     </ClCompile>
@@ -15,12 +13,12 @@
     <ClCompile Include="host\ParticlePresets.cpp">
       <Filter>host</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="character.cpp" />
+    <ClCompile Include="gameConfig.cpp" />
     <ClCompile Include="params.cpp" />
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="character.h" />
-    <ClInclude Include="gameConfig.h" />
     <ClInclude Include="host\FolderWatcher-win.h">
       <Filter>host</Filter>
     </ClInclude>
@@ -31,6 +29,8 @@
       <Filter>host</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="character.h" />
+    <ClInclude Include="gameConfig.h" />
     <ClInclude Include="params.h" />
   </ItemGroup>
   <ItemGroup>
@@ -45,5 +45,10 @@
     <None Include="sample\test.lua">
       <Filter>sample</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="sample\params.xml">
+      <Filter>sample</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

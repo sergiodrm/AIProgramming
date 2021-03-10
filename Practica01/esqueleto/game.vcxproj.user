@@ -10,4 +10,7 @@
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerCommandArguments>$(ProjectDir)\sample\test.lua</LocalDebuggerCommandArguments>
   </PropertyGroup>
+  <PropertyGroup>
+    <ShowAllFiles>false</ShowAllFiles>
+  </PropertyGroup>
 </Project>
