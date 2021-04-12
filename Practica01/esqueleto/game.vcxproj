@@ -124,6 +124,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AlignSteering.cpp" />
+    <ClCompile Include="ArriveSteering.cpp" />
     <ClCompile Include="character.cpp" />
     <ClCompile Include="gameConfig.cpp" />
     <ClCompile Include="host\FolderWatcher-win.cpp" />
@@ -131,17 +133,21 @@
     <ClCompile Include="host\GlutHostMain.cpp" />
     <ClCompile Include="host\ParticlePresets.cpp" />
     <ClCompile Include="params.cpp" />
+    <ClCompile Include="SeekSteering.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlignSteering.h" />
+    <ClInclude Include="ArriveSteering.h" />
     <ClInclude Include="character.h" />
     <ClInclude Include="gameConfig.h" />
     <ClInclude Include="host\FolderWatcher-win.h" />
     <ClInclude Include="host\GlutHost.h" />
     <ClInclude Include="host\ParticlePresets.h" />
     <ClInclude Include="params.h" />
+    <ClInclude Include="SeekSteering.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

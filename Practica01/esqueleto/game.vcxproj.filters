@@ -17,6 +17,9 @@
     <ClCompile Include="gameConfig.cpp" />
     <ClCompile Include="params.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="SeekSteering.cpp" />
+    <ClCompile Include="ArriveSteering.cpp" />
+    <ClCompile Include="AlignSteering.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="host\FolderWatcher-win.h">
@@ -32,6 +35,9 @@
     <ClInclude Include="character.h" />
     <ClInclude Include="gameConfig.h" />
     <ClInclude Include="params.h" />
+    <ClInclude Include="SeekSteering.h" />
+    <ClInclude Include="ArriveSteering.h" />
+    <ClInclude Include="AlignSteering.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="host">

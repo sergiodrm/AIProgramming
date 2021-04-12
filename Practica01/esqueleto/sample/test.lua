@@ -23,9 +23,9 @@ entity = Character.new()
 entity:setProp(prop, layer)
 -- Start the character (allow calls to OnUpdate)
 entity:start()
-entity:setLoc(0, 0)
+entity:setLoc(-50, -50)
 entity:setRot(-135)
-entity:setLinearVel(10, -20)
+entity:setLinearVel(-100, -200)
 --entity:setAngularVel(30)
 
 -- Enable Debug Draw
