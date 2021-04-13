@@ -12,38 +12,76 @@ float AlignSteering::GetSteering()
 {
     if (m_character)
     {
+        // Params vars to radians
         const Params& params = m_character->GetParams();
-        const float rotation = m_character->GetRot();
-        float target = params.targetRotation * static_cast<float>(PI) / 180.f;
+        float maxVelocity = ToRadians(params.maxAngularVelocity);
+        float maxAcceleration = ToRadians(params.maxAngularAcceleration);
+        float target = ToRadians(params.targetRotation);
+        float arriveRadius = ToRadians(params.angularArriveRadius);
+        float destRadius = ToRadians(params.angularDestRadius);
 
-        // Normalize target angle
-        int rounds = static_cast<int>(fmodf(target, PI));
-        target += 2 * PI * -1.f * rounds;
+        // Character vars
+        float currentRotation = ToRadians(m_character->GetRot());
+        float currentAngularVelocity = ToRadians(m_character->GetAngularVelocity());
 
+        // Normalize angles
+        NormalizeAngle(maxVelocity);
+        NormalizeAngle(maxAcceleration);
+        NormalizeAngle(target);
+        NormalizeAngle(arriveRadius);
+        NormalizeAngle(destRadius);
+        NormalizeAngle(currentRotation);
+        NormalizeAngle(currentAngularVelocity);
 
-        // Desired angular velocity
-        m_desiredVelocity = target - rotation;
-        float maxAngularVelocity = params.maxAngularVelocity;
-
-        if (m_desiredVelocity < params.angularDestRadius)
-            maxAngularVelocity = 0.f;
-
-        if (m_desiredVelocity < params.angularArriveRadius)
+        const float deltaRotation = target - currentRotation;
+        m_desiredVelocity = deltaRotation > 0 ? 1.f : -1.f;
+        if (abs(deltaRotation) < destRadius)
         {
-            const float factor = m_desiredVelocity / params.angularArriveRadius;
-            maxAngularVelocity *= factor;
+            maxVelocity = 0.f;
         }
-
-        m_steering = m_desiredVelocity - m_character->GetAngularVelocity();
-        if (m_steering > params.maxAngularAcceleration)
+        else if (abs(deltaRotation) < arriveRadius)
         {
-            m_steering = params.maxAngularAcceleration;
+            const float factor = abs(deltaRotation) / arriveRadius;
+            maxVelocity *= factor;
         }
+        m_desiredVelocity *= maxVelocity;
 
-        return m_steering;
+        m_steering = m_desiredVelocity - currentAngularVelocity > 0.f ? 1.f : -1.f;
+        m_steering *= maxAcceleration;
+
+        return ToDegrees(m_steering);
     }
     return 0.f;
 }
 
 void AlignSteering::DrawDebug()
-{ }
+{
+    MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get();
+    gfxDevice.SetPenColor(USColorVec(1.f, 0.2f, 1.f, 1.f));
+    USVec2D position = m_character->GetLoc();
+    float target = ToRadians(m_character->GetParams().targetRotation);
+    NormalizeAngle(target);
+
+    USVec2D delta = position + USVec2D(cosf(m_desiredVelocity), sinf(m_desiredVelocity)) * 50.f;
+
+    MOAIDraw::DrawLine(position.mX, position.mY, delta.mX, delta.mY);
+}
+
+void AlignSteering::NormalizeAngle(float& angleInRadians)
+{
+    if (angleInRadians < -static_cast<float>(PI) || angleInRadians > static_cast<float>(PI))
+    {
+        const int rounds = static_cast<int>(fmodf(angleInRadians, PI));
+        angleInRadians += 2 * static_cast<float>(PI) * -1.f * static_cast<float>(rounds);
+    }
+}
+
+float AlignSteering::ToRadians(float angleInDegrees)
+{
+    return angleInDegrees * static_cast<float>(PI) / 180.f;
+}
+
+float AlignSteering::ToDegrees(float angleInRadians)
+{
+    return angleInRadians * 180.f / static_cast<float>(PI);
+}

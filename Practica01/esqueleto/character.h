@@ -42,6 +42,7 @@ private:
 
     Params mParams;
 
+    //ArriveSteering m_steering;
     AlignSteering m_steering;
 
     // Lua configuration

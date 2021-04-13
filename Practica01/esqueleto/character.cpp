@@ -29,26 +29,53 @@ void Character::OnUpdate(float step)
     // Acceleration
     float steering = m_steering.GetSteering();
     mAngularVelocity += steering * step;
+    printf("Steering: %f\n", steering);
 
-    // Update position
+    //Update position
     float rotation = GetRot();
     rotation += mAngularVelocity * step;
     SetRot(rotation);
+
+    /*USVec2D steering = m_steering.GetSteering(mParams.targetPosition);
+    mLinearVelocity += steering * step;
+    USVec2D position = GetLoc();
+    position += mLinearVelocity * step;
+    SetLoc(position);*/
 }
 
 void Character::DrawDebug()
 {
     MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get();
 
-    // Draw target
+    // Draw target position
     gfxDevice.SetPenColor(0.7f, 0.2f, 0.2f, 1.f);
     MOAIDraw::DrawPoint(mParams.targetPosition.mX, mParams.targetPosition.mY);
+    // Arrive radius
     MOAIDraw::DrawEllipseOutline(mParams.targetPosition.mX, mParams.targetPosition.mY, mParams.arrive_radius,
                                  mParams.arrive_radius, 10);
-
-    gfxDevice.SetPenColor(0.2f, 0.2f, 0.7f, 1.f);
+    // Dest radius
     MOAIDraw::DrawEllipseOutline(mParams.targetPosition.mX, mParams.targetPosition.mY, mParams.dest_radius,
                                  mParams.dest_radius, 10);
+
+
+    // Draw target rotation
+    float targetRotation = m_steering.ToRadians(mParams.targetRotation);
+    m_steering.NormalizeAngle(targetRotation);
+    USVec2D delta = USVec2D(cosf(targetRotation), sinf(targetRotation)) * 50.f + GetLoc();
+    MOAIDraw::DrawLine(GetLoc().mX, GetLoc().mY, delta.mX, delta.mY);
+
+    float arriveRadius = m_steering.ToRadians(mParams.angularArriveRadius);
+    delta = USVec2D(cosf(targetRotation + arriveRadius), sinf(targetRotation + arriveRadius)) * 50.f + GetLoc();
+    MOAIDraw::DrawLine(GetLoc().mX, GetLoc().mY, delta.mX, delta.mY);
+    delta = USVec2D(cosf(targetRotation - arriveRadius), sinf(targetRotation - arriveRadius)) * 50.f + GetLoc();
+    MOAIDraw::DrawLine(GetLoc().mX, GetLoc().mY, delta.mX, delta.mY);
+
+    // Show current rotation
+    gfxDevice.SetPenColor(0.7f, 1.f, 0.2f, 1.f);
+    float currentRotation = m_steering.ToRadians(GetRot());
+    delta = USVec2D(cosf(currentRotation), sinf(currentRotation)) * 50.f + GetLoc();
+    MOAIDraw::DrawLine(GetLoc().mX, GetLoc().mY, delta.mX, delta.mY);
+
 
     m_steering.DrawDebug();
 }
