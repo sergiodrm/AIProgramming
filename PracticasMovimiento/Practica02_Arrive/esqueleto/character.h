@@ -4,10 +4,7 @@
 #include <moaicore/MOAIEntity2D.h>
 #include <params.h>
 
-
-#include "AlignSteering.h"
 #include "ArriveSteering.h"
-#include "SeekSteering.h"
 
 class Character : public MOAIEntity2D
 {
@@ -42,8 +39,7 @@ private:
 
     Params mParams;
 
-    //ArriveSteering m_steering;
-    AlignSteering m_steering;
+    ArriveSteering m_steering;
 
     // Lua configuration
 public:

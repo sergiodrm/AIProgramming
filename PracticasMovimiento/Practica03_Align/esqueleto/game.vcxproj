@@ -140,7 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlignSteering.h" />
-    <ClInclude Include="AlignToMovement.h" />
     <ClInclude Include="ArriveSteering.h" />
     <ClInclude Include="character.h" />
     <ClInclude Include="gameConfig.h" />

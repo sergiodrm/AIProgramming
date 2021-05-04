@@ -11,9 +11,9 @@ public:
 
     void DrawDebug();
 
-    static void NormalizeAngle(float& angleInRadians);
-    static float ToRadians(float angleInDegrees);
-    static float ToDegrees(float angleInRadians);
+    //static void NormalizeAngle(float& angleInRadians);
+    //static float ToRadians(float angleInDegrees);
+    //static float ToDegrees(float angleInRadians);
 
 private:
 

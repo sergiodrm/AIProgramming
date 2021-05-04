@@ -49,11 +49,11 @@ void ArriveSteering::DrawDebug()
     // Desired velocity
     USVec2D position = m_character->GetLoc();
     USVec2D delta = position + m_desiredVelocity;
-    gfxDevice.SetPenColor(1.f, 0.f, 1.f, 1.f);
+    gfxDevice.SetPenColor(1.f, 0.f, 0.f, 1.f);
     MOAIDraw::DrawLine(position.mX, position.mY, delta.mX, delta.mY);
 
     // Acceleration
     delta = position + m_steering;
-    gfxDevice.SetPenColor(0.f, 1.f, 1.f, 1.f);
+    gfxDevice.SetPenColor(1.f, 1.f, 1.f, 1.f);
     MOAIDraw::DrawLine(position.mX, position.mY, delta.mX, delta.mY);
 }

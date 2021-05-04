@@ -26,21 +26,11 @@ void Character::OnUpdate(float step)
 {
     MOAIEntity2D::OnUpdate(step);
 
-    // Acceleration
-    float steering = m_steering.GetSteering();
-    mAngularVelocity += steering * step;
-    printf("Steering: %f\n", steering);
-
-    //Update position
-    float rotation = GetRot();
-    rotation += mAngularVelocity * step;
-    SetRot(rotation);
-
-    /*USVec2D steering = m_steering.GetSteering(mParams.targetPosition);
+    USVec2D steering = m_steering.GetSteering(mParams.targetPosition);
     mLinearVelocity += steering * step;
     USVec2D position = GetLoc();
     position += mLinearVelocity * step;
-    SetLoc(position);*/
+    SetLoc(position);
 }
 
 void Character::DrawDebug()
@@ -57,24 +47,10 @@ void Character::DrawDebug()
     MOAIDraw::DrawEllipseOutline(mParams.targetPosition.mX, mParams.targetPosition.mY, mParams.dest_radius,
                                  mParams.dest_radius, 10);
 
-
-    // Draw target rotation
-    float targetRotation = m_steering.ToRadians(mParams.targetRotation);
-    m_steering.NormalizeAngle(targetRotation);
-    USVec2D delta = USVec2D(cosf(targetRotation), sinf(targetRotation)) * 50.f + GetLoc();
-    MOAIDraw::DrawLine(GetLoc().mX, GetLoc().mY, delta.mX, delta.mY);
-
-    float arriveRadius = m_steering.ToRadians(mParams.angularArriveRadius);
-    delta = USVec2D(cosf(targetRotation + arriveRadius), sinf(targetRotation + arriveRadius)) * 50.f + GetLoc();
-    MOAIDraw::DrawLine(GetLoc().mX, GetLoc().mY, delta.mX, delta.mY);
-    delta = USVec2D(cosf(targetRotation - arriveRadius), sinf(targetRotation - arriveRadius)) * 50.f + GetLoc();
-    MOAIDraw::DrawLine(GetLoc().mX, GetLoc().mY, delta.mX, delta.mY);
-
-    // Show current rotation
-    gfxDevice.SetPenColor(0.7f, 1.f, 0.2f, 1.f);
-    float currentRotation = m_steering.ToRadians(GetRot());
-    delta = USVec2D(cosf(currentRotation), sinf(currentRotation)) * 50.f + GetLoc();
-    MOAIDraw::DrawLine(GetLoc().mX, GetLoc().mY, delta.mX, delta.mY);
+    // Draw current linear velocity
+    gfxDevice.SetPenColor(0.f, 1.f, 0.f, 1.f);
+    const USVec2D pos = GetLoc();
+    MOAIDraw::DrawLine(pos.mX, pos.mY, pos.mX + mLinearVelocity.mX, pos.mY + mLinearVelocity.mY);
 
 
     m_steering.DrawDebug();
