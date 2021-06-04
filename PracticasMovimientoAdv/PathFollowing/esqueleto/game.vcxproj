@@ -124,43 +124,44 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AlignSteering.cpp" />
-    <ClCompile Include="AlignToMovement.cpp" />
-    <ClCompile Include="ArriveSteering.cpp" />
     <ClCompile Include="character.cpp" />
-    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="gameConfig.cpp" />
     <ClCompile Include="host\FolderWatcher-win.cpp" />
     <ClCompile Include="host\GlutHost.cpp" />
     <ClCompile Include="host\GlutHostMain.cpp" />
     <ClCompile Include="host\ParticlePresets.cpp" />
     <ClCompile Include="params.cpp" />
-    <ClCompile Include="SeekSteering.cpp" />
+    <ClCompile Include="Path.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Steering.cpp" />
+    <ClCompile Include="Steerings\AlignToMovement.cpp" />
+    <ClCompile Include="Steerings\ArriveSteering.cpp" />
+    <ClCompile Include="Steerings\Pursue.cpp" />
+    <ClCompile Include="Steerings\SeekSteering.cpp" />
+    <ClCompile Include="Steerings\Steering.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AlignSteering.h" />
-    <ClInclude Include="AlignToMovement.h" />
-    <ClInclude Include="ArriveSteering.h" />
     <ClInclude Include="character.h" />
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="gameConfig.h" />
     <ClInclude Include="host\FolderWatcher-win.h" />
     <ClInclude Include="host\GlutHost.h" />
     <ClInclude Include="host\ParticlePresets.h" />
     <ClInclude Include="params.h" />
-    <ClInclude Include="SeekSteering.h" />
+    <ClInclude Include="Path.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Steering.h" />
+    <ClInclude Include="Steerings\AlignToMovement.h" />
+    <ClInclude Include="Steerings\ArriveSteering.h" />
+    <ClInclude Include="Steerings\Pursue.h" />
+    <ClInclude Include="Steerings\SeekSteering.h" />
+    <ClInclude Include="Steerings\Steering.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sample\test.lua" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="sample\params.xml" />
+    <Xml Include="sample\path.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

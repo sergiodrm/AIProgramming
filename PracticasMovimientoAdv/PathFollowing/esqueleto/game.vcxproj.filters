@@ -17,12 +17,22 @@
     <ClCompile Include="gameConfig.cpp" />
     <ClCompile Include="params.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="SeekSteering.cpp" />
-    <ClCompile Include="ArriveSteering.cpp" />
-    <ClCompile Include="AlignSteering.cpp" />
-    <ClCompile Include="Steering.cpp" />
-    <ClCompile Include="AlignToMovement.cpp" />
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Path.cpp" />
+    <ClCompile Include="Steerings\AlignToMovement.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
+    <ClCompile Include="Steerings\ArriveSteering.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
+    <ClCompile Include="Steerings\SeekSteering.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
+    <ClCompile Include="Steerings\Steering.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
+    <ClCompile Include="Steerings\Pursue.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="host\FolderWatcher-win.h">
@@ -38,12 +48,22 @@
     <ClInclude Include="character.h" />
     <ClInclude Include="gameConfig.h" />
     <ClInclude Include="params.h" />
-    <ClInclude Include="SeekSteering.h" />
-    <ClInclude Include="ArriveSteering.h" />
-    <ClInclude Include="AlignSteering.h" />
-    <ClInclude Include="AlignToMovement.h" />
-    <ClInclude Include="Steering.h" />
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Path.h" />
+    <ClInclude Include="Steerings\AlignToMovement.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
+    <ClInclude Include="Steerings\ArriveSteering.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
+    <ClInclude Include="Steerings\SeekSteering.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
+    <ClInclude Include="Steerings\Steering.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
+    <ClInclude Include="Steerings\Pursue.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="host">
@@ -51,6 +71,9 @@
     </Filter>
     <Filter Include="sample">
       <UniqueIdentifier>{dafee91e-18b1-4dd7-a488-726565484f1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Steerings">
+      <UniqueIdentifier>{88790e88-6ed4-4a47-9636-99570d861aa5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +83,9 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="sample\params.xml">
+      <Filter>sample</Filter>
+    </Xml>
+    <Xml Include="sample\path.xml">
       <Filter>sample</Filter>
     </Xml>
   </ItemGroup>

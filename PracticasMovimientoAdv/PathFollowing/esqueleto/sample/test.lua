@@ -34,21 +34,10 @@ layer:setDrawDebug(debug)
 -- Add this character to draw debug
 MOAIDrawDebug.insertEntity(entity)
 
-entity2 = Enemy.new()
--- Add prop to be the renderable for this character
-entity2:setProp(prop, layer)
--- Start the character (allow calls to OnUpdate)
-entity2:start()
-entity2:setLoc(0, 0)
-entity2:setRot(-135)
-entity2:setLinearVel(-100, -200)
-
-
 mouseX = 0
 mouseY = 0
 
 function onClick(down)
-  entity:setLinearVel(-100, -200)
   entity:setLoc(mouseX, mouseY)
   entity:setRot(-135)
 end

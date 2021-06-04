@@ -4,6 +4,8 @@
 #include <moaicore/MOAIEntity2D.h>
 #include <params.h>
 
+#include "Path.h"
+
 class CSteering;
 
 namespace Math
@@ -39,15 +41,18 @@ public:
     USVec2D GetLinearVelocity() const { return mLinearVelocity; }
     float GetAngularVelocity() const { return mAngularVelocity; }
     const Params& GetParams() const { return mParams; }
+    const CPath& GetPath() const { return mPath; }
 
-protected:
+    void SetTarget(const USVec2D& target) { mParams.targetPosition = target; }
 
+private:
     USVec2D mLinearVelocity;
     float mAngularVelocity;
 
     Params mParams;
+    CPath mPath;
 
-    CSteering* m_steering;
+    std::vector<CSteering*> m_steerings;
 
     // Lua configuration
 public:
