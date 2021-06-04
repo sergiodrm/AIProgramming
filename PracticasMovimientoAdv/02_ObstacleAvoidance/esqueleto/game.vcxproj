@@ -130,6 +130,7 @@
     <ClCompile Include="host\GlutHost.cpp" />
     <ClCompile Include="host\GlutHostMain.cpp" />
     <ClCompile Include="host\ParticlePresets.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="params.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -137,6 +138,7 @@
     </ClCompile>
     <ClCompile Include="Steerings\AlignToMovement.cpp" />
     <ClCompile Include="Steerings\ArriveSteering.cpp" />
+    <ClCompile Include="Steerings\ObstacleAvoidance.cpp" />
     <ClCompile Include="Steerings\Pursue.cpp" />
     <ClCompile Include="Steerings\SeekSteering.cpp" />
     <ClCompile Include="Steerings\Steering.cpp" />
@@ -147,11 +149,13 @@
     <ClInclude Include="host\FolderWatcher-win.h" />
     <ClInclude Include="host\GlutHost.h" />
     <ClInclude Include="host\ParticlePresets.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="params.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Steerings\AlignToMovement.h" />
     <ClInclude Include="Steerings\ArriveSteering.h" />
+    <ClInclude Include="Steerings\ObstacleAvoidance.h" />
     <ClInclude Include="Steerings\Pursue.h" />
     <ClInclude Include="Steerings\SeekSteering.h" />
     <ClInclude Include="Steerings\Steering.h" />
@@ -160,6 +164,7 @@
     <None Include="sample\test.lua" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="sample\obstacles.xml" />
     <Xml Include="sample\params.xml" />
     <Xml Include="sample\path.xml" />
   </ItemGroup>

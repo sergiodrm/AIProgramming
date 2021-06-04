@@ -30,9 +30,13 @@
     <ClCompile Include="Steerings\Steering.cpp">
       <Filter>Steerings</Filter>
     </ClCompile>
-    <ClCompile Include="Steerings\Pursue.cpp">
+    <ClCompile Include="Steerings\PathFollowing.cpp">
       <Filter>Steerings</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\02_ObstacleAvoidance\esqueleto\Steerings\ObstacleAvoidance.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\02_ObstacleAvoidance\esqueleto\Obstacle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="host\FolderWatcher-win.h">
@@ -61,9 +65,13 @@
     <ClInclude Include="Steerings\Steering.h">
       <Filter>Steerings</Filter>
     </ClInclude>
-    <ClInclude Include="Steerings\Pursue.h">
+    <ClInclude Include="Steerings\PathFollowing.h">
       <Filter>Steerings</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\02_ObstacleAvoidance\esqueleto\Steerings\ObstacleAvoidance.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\02_ObstacleAvoidance\esqueleto\Obstacle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="host">
@@ -86,6 +94,9 @@
       <Filter>sample</Filter>
     </Xml>
     <Xml Include="sample\path.xml">
+      <Filter>sample</Filter>
+    </Xml>
+    <Xml Include="..\..\02_ObstacleAvoidance\esqueleto\sample\obstacles.xml">
       <Filter>sample</Filter>
     </Xml>
   </ItemGroup>

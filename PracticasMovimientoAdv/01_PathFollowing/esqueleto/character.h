@@ -6,6 +6,7 @@
 
 #include "Path.h"
 
+class CObstacle;
 class CSteering;
 
 namespace Math
@@ -51,8 +52,9 @@ private:
 
     Params mParams;
     CPath mPath;
+    std::vector<std::unique_ptr<CObstacle>> m_obstacles;
 
-    std::vector<CSteering*> m_steerings;
+    std::vector<std::unique_ptr<CSteering>> m_steerings;
 
     // Lua configuration
 public:

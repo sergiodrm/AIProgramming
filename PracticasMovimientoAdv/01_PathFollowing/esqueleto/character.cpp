@@ -4,9 +4,10 @@
 
 #include <params.h>
 
+#include "../../02_ObstacleAvoidance/esqueleto/Obstacle.h"
 #include "Steerings/AlignToMovement.h"
 #include "Steerings/ArriveSteering.h"
-#include "Steerings/Pursue.h"
+#include "Steerings/PathFollowing.h"
 
 // ************************************************************************
 namespace Math
@@ -30,11 +31,6 @@ namespace Math
         {
             angleInDegrees += 360.f;
         }
-        //if (angleInDegrees < -180.f || angleInDegrees > 180.f)
-        //{
-        //    const int rounds = static_cast<int>(fmodf(angleInDegrees, 180.f));
-        //    angleInDegrees += 2 * 180.f * -1.f * static_cast<float>(rounds);
-        //}
     }
 
     float ToRadians(float angleInDegrees)
@@ -56,17 +52,13 @@ Character::Character() : mLinearVelocity(0.0f, 0.0f), mAngularVelocity(0.0f)
     RTTI_EXTEND(MOAIEntity2D)
     RTTI_END
 
-    m_steerings.push_back(new CPursue(this));
-    m_steerings.push_back(new CArriveSteering(this));
-    m_steerings.push_back(new CAlignToMovement(this));
+    m_steerings.push_back(std::make_unique<CPathFollowing>(this));
+    m_steerings.push_back(std::make_unique<CArriveSteering>(this));
+    m_steerings.push_back(std::make_unique<CAlignToMovement>(this));
 }
 
 Character::~Character()
 {
-    for (CSteering* it : m_steerings)
-    {
-        delete it;
-    }
     m_steerings.clear();
 }
 
@@ -74,6 +66,7 @@ void Character::OnStart()
 {
     ReadParams("params.xml", mParams);
     mPath.Load("path.xml");
+    CObstacle::LoadFromFile(m_obstacles, "obstacles.xml");
 }
 
 void Character::OnStop()
@@ -84,7 +77,7 @@ void Character::OnUpdate(float step)
     MOAIEntity2D::OnUpdate(step);
 
     SSteeringResult steering;
-    for (CSteering* it : m_steerings)
+    for (std::unique_ptr<CSteering>& it : m_steerings)
     {
         if (it)
         {
@@ -117,7 +110,11 @@ void Character::DrawDebug()
     gfxDevice.SetPenColor(0.7f, 0.2f, 0.2f, 1.f);
     mPath.DrawDebug();
 
-    for (CSteering* it : m_steerings)
+    for (std::unique_ptr<CSteering>& it : m_steerings)
+    {
+        it->DrawDebug();
+    }
+    for (std::unique_ptr<CObstacle>& it : m_obstacles)
     {
         it->DrawDebug();
     }
