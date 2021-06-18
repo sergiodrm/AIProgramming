@@ -1,9 +1,19 @@
 #include "stdafx.h"
 #include "PathFollowing.h"
 
+#include "ArriveSteering.h"
 #include "character.h"
 
-CPathFollowing::~CPathFollowing() {}
+CPathFollowing::CPathFollowing(Character* character)
+    : CSteering(character), m_arriveSteering(nullptr)
+{
+    m_arriveSteering = new CArriveSteering(character);
+}
+
+CPathFollowing::~CPathFollowing()
+{
+    delete m_arriveSteering;
+}
 
 const SSteeringResult& CPathFollowing::GetSteering(const USVec2D& _target)
 {
@@ -22,7 +32,8 @@ const SSteeringResult& CPathFollowing::GetSteering(const USVec2D& _target)
     m_closest = pointSegment.SegmentPoint;
     const float lookAhead = m_character->GetParams().look_ahead;
     m_target = m_character->GetPath().GetPointAhead(pointSegment, lookAhead);
-    m_character->SetTarget(m_target);
+
+    m_steering = m_arriveSteering->GetSteering(m_target);
     return m_steering;
 }
 

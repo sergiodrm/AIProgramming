@@ -2,10 +2,12 @@
 
 #include "Steering.h"
 
+class CArriveSteering;
+
 class CPathFollowing : public CSteering
 {
 public:
-    CPathFollowing(Character* character) : CSteering(character) {}
+    CPathFollowing(Character* character);
     virtual ~CPathFollowing();
 
     const SSteeringResult& GetSteering(const USVec2D& _target) override;
@@ -15,4 +17,5 @@ private:
     USVec2D m_target;
     USVec2D m_closest;
     USVec2D m_projection;
+    CArriveSteering* m_arriveSteering;
 };

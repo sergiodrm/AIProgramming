@@ -42,7 +42,7 @@ public:
     USVec2D GetLinearVelocity() const { return mLinearVelocity; }
     float GetAngularVelocity() const { return mAngularVelocity; }
     const Params& GetParams() const { return mParams; }
-    const CPath& GetPath() const { return mPath; }
+    const CPath& GetPath() const { return m_path; }
     const std::vector<std::shared_ptr<CObstacle>>& GetObstacles() const { return m_obstacles; }
 
     void SetTarget(const USVec2D& target) { mParams.targetPosition = target; }
@@ -52,10 +52,11 @@ private:
     float mAngularVelocity;
 
     Params mParams;
-    CPath mPath;
+    CPath m_path;
     std::vector<std::shared_ptr<CObstacle>> m_obstacles;
 
     std::vector<std::unique_ptr<CSteering>> m_steerings;
+    std::vector<float> m_weights;
 
     // Lua configuration
 public:

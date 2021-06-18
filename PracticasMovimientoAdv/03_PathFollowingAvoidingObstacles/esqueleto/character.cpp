@@ -4,11 +4,11 @@
 
 #include <params.h>
 
-#include "../../02_ObstacleAvoidance/esqueleto/Obstacle.h"
 #include "Steerings/AlignToMovement.h"
 #include "Steerings/ArriveSteering.h"
 #include "Steerings/ObstacleAvoidance.h"
 #include "Steerings/PathFollowing.h"
+#include "Obstacle.h"
 
 // ************************************************************************
 namespace Math
@@ -54,6 +54,11 @@ Character::Character() : mLinearVelocity(0.0f, 0.0f), mAngularVelocity(0.0f)
     RTTI_END
 
     m_steerings.push_back(std::make_unique<CObstacleAvoidance>(this));
+    m_weights.push_back(0.8f);
+    m_steerings.push_back(std::make_unique<CPathFollowing>(this));
+    m_weights.push_back(0.2f);
+    m_steerings.push_back(std::make_unique<CAlignToMovement>(this));
+    m_weights.push_back(1.f);
 }
 
 Character::~Character()
@@ -64,7 +69,7 @@ Character::~Character()
 void Character::OnStart()
 {
     ReadParams("params.xml", mParams);
-    mPath.Load("path.xml");
+    m_path.Load("path.xml");
     CObstacle::LoadFromFile(m_obstacles, "obstacles.xml");
 }
 
@@ -76,11 +81,16 @@ void Character::OnUpdate(float step)
     MOAIEntity2D::OnUpdate(step);
 
     SSteeringResult steering;
+    uint32_t index = 0;
     for (std::unique_ptr<CSteering>& it : m_steerings)
     {
         if (it)
         {
-            steering += it->GetSteering(USVec2D());
+            SSteeringResult result;
+            result.Linear += it->GetSteering(USVec2D()).Linear * m_weights.at(index);
+            result.Angular += it->GetSteering(0.f).Angular * m_weights.at(index);
+            steering += result;
+            ++index;
         }
     }
 
@@ -88,6 +98,14 @@ void Character::OnUpdate(float step)
     mAngularVelocity += steering.Angular * step;
     SetLoc(GetLoc() + mLinearVelocity * step);
     SetRot(GetRot() + mAngularVelocity * step);
+
+    for (std::shared_ptr<CObstacle>& it : m_obstacles)
+    {
+        USVec2D diff = GetLoc() - it->GetPosition();
+        float distanceSquared = mParams.char_radius + it->GetRadius();
+        distanceSquared *= distanceSquared;
+        it->SetIsColliding(diff.LengthSquared() < distanceSquared);
+    }
 }
 
 void Character::DrawDebug()
@@ -107,6 +125,7 @@ void Character::DrawDebug()
 
     gfxDevice.SetPenColor(0.7f, 0.2f, 0.2f, 1.f);
 
+    m_path.DrawDebug();
     for (std::unique_ptr<CSteering>& it : m_steerings)
     {
         it->DrawDebug();

@@ -1,7 +1,7 @@
 #include <stdafx.h>
 #include "ObstacleAvoidance.h"
-
 #include "character.h"
+#include "Obstacle.h"
 
 const SSteeringResult& CObstacleAvoidance::GetSteering(const USVec2D& _target)
 {

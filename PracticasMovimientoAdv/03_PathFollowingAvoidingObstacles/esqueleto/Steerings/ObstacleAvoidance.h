@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Obstacle.h"
 #include "Steering.h"
 
 class CObstacleAvoidance : public CSteering

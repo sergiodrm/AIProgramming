@@ -16,7 +16,7 @@
 		<time_ahead value="0.5"/>
 
 		<obstacle_look_ahead value="80"/>
-		<char_radius value="20"/>
+		<char_radius value="4"/>
 
 	</params>
 </root>

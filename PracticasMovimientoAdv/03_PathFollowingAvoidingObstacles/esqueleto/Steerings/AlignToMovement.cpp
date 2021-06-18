@@ -7,7 +7,15 @@
 #include "params.h"
 
 CAlignToMovement::CAlignToMovement(Character* character)
-    : CSteering(character) {}
+    : CSteering(character)
+{
+    m_alignDelegate = new CAlign(character);
+}
+
+CAlignToMovement::~CAlignToMovement()
+{
+    delete m_alignDelegate;
+}
 
 
 const SSteeringResult& CAlignToMovement::GetSteering(float)
@@ -18,7 +26,7 @@ const SSteeringResult& CAlignToMovement::GetSteering(float)
     }
     // Calculate target rotation
     const USVec2D nextLinearVelocity = m_character->GetLinearVelocity();
-    float target = Math::ToDegrees(atan2f(nextLinearVelocity.mY, nextLinearVelocity.mX));
+    const float target = Math::ToDegrees(atan2f(nextLinearVelocity.mY, nextLinearVelocity.mX));
 
     m_steering = m_alignDelegate->GetSteering(target);
     return m_steering;

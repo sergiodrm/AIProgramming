@@ -8,6 +8,7 @@ class CAlignToMovement : public CSteering
 {
 public:
     CAlignToMovement(Character* character);
+    ~CAlignToMovement();
 
     virtual const SSteeringResult& GetSteering(float _target) override;
     virtual void DrawDebug() const override;
