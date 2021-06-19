@@ -3,6 +3,8 @@
 
 #include <moaicore/MOAIEntity2D.h>
 
+class CNavMesh;
+
 class Pathfinder: public virtual MOAIEntity2D
 {
 public:
@@ -22,6 +24,8 @@ private:
 private:
 	USVec2D m_StartPosition;
 	USVec2D m_EndPosition;
+
+	CNavMesh* m_navMesh;
 
 	// Lua configuration
 public:

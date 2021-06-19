@@ -20,11 +20,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>NotSet</CharacterSet>
     <WholeProgramOptimization>false</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -126,6 +128,7 @@
     <ClCompile Include="host\GlutHost.cpp" />
     <ClCompile Include="host\GlutHostMain.cpp" />
     <ClCompile Include="host\ParticlePresets.cpp" />
+    <ClCompile Include="pathfinding\NavMesh.cpp" />
     <ClCompile Include="pathfinding\pathfinder.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -137,6 +140,7 @@
     <ClInclude Include="host\FolderWatcher-win.h" />
     <ClInclude Include="host\GlutHost.h" />
     <ClInclude Include="host\ParticlePresets.h" />
+    <ClInclude Include="pathfinding\NavMesh.h" />
     <ClInclude Include="pathfinding\pathfinder.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

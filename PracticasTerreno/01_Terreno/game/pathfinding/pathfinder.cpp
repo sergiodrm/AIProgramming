@@ -1,12 +1,15 @@
 #include <stdafx.h>
 
 #include "pathfinder.h"
+#include "NavMesh.h"
 
 Pathfinder::Pathfinder() : MOAIEntity2D()
 {
 	RTTI_BEGIN
 		RTTI_EXTEND(MOAIEntity2D)
-	RTTI_END
+		RTTI_END
+
+		m_navMesh = CNavMesh::Load("escenario_navmesh.xml");
 }
 
 Pathfinder::~Pathfinder()
@@ -21,7 +24,7 @@ void Pathfinder::UpdatePath()
 
 void Pathfinder::DrawDebug()
 {
-
+	m_navMesh->DrawDebug();
 }
 
 bool Pathfinder::PathfindStep()

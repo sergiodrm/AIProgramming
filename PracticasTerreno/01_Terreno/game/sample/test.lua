@@ -19,7 +19,7 @@ function drawBackground(image, sizeX, sizeY)
     layer:insertProp(prop)
 end
 
-drawBackground("background.png", 1024, 768)
+drawBackground("escenario.png", 1024, 768)
 
 texture_name = "ghost32.png"
 gfxQuad = MOAIGfxQuad2D.new()
