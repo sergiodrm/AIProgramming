@@ -163,7 +163,7 @@ void CGrid::DrawDebug() const
             }
             else
             {
-                gfxDevice.SetPenColor(0.01f + 0.2f * cost, 0.4f, 0.1f, 0.1f);
+                gfxDevice.SetPenColor(0.6f, 0.6f - cost * 0.01f, 0.6f, 0.1f);
                 MOAIDraw::DrawRectFill(rect);
                 gfxDevice.SetPenColor(0.1f, 0.1f, 0.1f, 1.f);
                 MOAIDraw::DrawRectOutline(rect);

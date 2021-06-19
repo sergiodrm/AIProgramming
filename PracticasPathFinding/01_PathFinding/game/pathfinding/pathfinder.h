@@ -38,6 +38,7 @@ private:
     float CalculateHeuristic(const USVec2D& _point);
     void FillPath(SNode* _end);
     SNode* GetNodeInVector(std::vector<SNode*>& _vector, const USVec2D& _nodePosition) const;
+    void DrawNodes(const std::vector<SNode*>& _vector, float _radius, const USVec4D& _color) const;
 private:
     USVec2D m_StartPosition;
     USVec2D m_EndPosition;

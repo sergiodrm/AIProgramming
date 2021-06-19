@@ -58,6 +58,17 @@ SNode* Pathfinder::GetNodeInVector(std::vector<SNode*>& _vector, const USVec2D& 
     return nullptr;
 }
 
+void Pathfinder::DrawNodes(const std::vector<SNode*>& _vector, float _radius, const USVec4D& _color) const
+{
+    for (const SNode* it : _vector)
+    {
+        USVec2D center = m_grid->GridToWorldLocation(it->Position);
+        center += m_grid->GetRectSize() * 0.5f;
+        MOAIGfxDevice::Get().SetPenColor(_color.mX, _color.mY, _color.mZ, _color.mW);
+        MOAIDraw::DrawEllipseFill(center.mX, center.mY, _radius, _radius, 10);
+    }
+}
+
 void Pathfinder::DrawDebug()
 {
     MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get();
@@ -76,31 +87,9 @@ void Pathfinder::DrawDebug()
     endCenter += m_grid->GetRectSize() * 0.5f;
     MOAIDraw::DrawEllipseFill(endCenter.mX, endCenter.mY, 10.f, 10.f, 10);
 
-    if (m_currentNode)
-    {
-        SNode* it = m_currentNode;
-        while (it)
-        {
-            float radius = 10.f;
-            if (it->Position.Equals(m_endGridPosition))
-            {
-                gfxDevice.SetPenColor(0.1f, 0.5f, 0.2f, 1.f);
-            }
-            else if (it->Position.Equals(m_startGridPosition))
-            {
-                gfxDevice.SetPenColor(0.1f, 0.5f, 0.5f, 1.f);
-            }
-            else
-            {
-                gfxDevice.SetPenColor(0.1f, 0.2f, 0.2f, 1.f);
-                radius = 5.f;
-            }
-            USVec2D center = m_grid->GridToWorldLocation(it->Position);
-            center += m_grid->GetRectSize() * 0.5f;
-            MOAIDraw::DrawEllipseFill(center.mX, center.mY, radius, radius, 10);
-            it = it->Parent;
-        }
-    }
+    DrawNodes(m_closeNodes, 5.f, USVec4D(0.3f, 0.1f, 0.1f, 1.f));
+    DrawNodes(m_openNodes, 5.f, USVec4D(0.7f, 0.1f, 0.1f, 1.f));
+    DrawNodes(m_path, 5.f, USVec4D(0.2f, 0.4f, 0.8f, 1.f));
 }
 
 bool Pathfinder::PathfindStep()
