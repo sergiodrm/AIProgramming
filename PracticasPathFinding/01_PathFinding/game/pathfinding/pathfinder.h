@@ -3,8 +3,8 @@
 
 #include <queue>
 #include <moaicore/MOAIEntity2D.h>
+#include "Grid.h"
 
-class CGrid;
 struct SNode;
 
 class Pathfinder : public virtual MOAIEntity2D
@@ -18,12 +18,14 @@ public:
     void SetStartPosition(float x, float y)
     {
         m_StartPosition = USVec2D(x, y);
+        m_startGridPosition = m_grid->WorldToGridLocation(m_StartPosition);
         UpdatePath();
     }
 
     void SetEndPosition(float x, float y)
     {
         m_EndPosition = USVec2D(x, y);
+        m_endGridPosition = m_grid->WorldToGridLocation(m_EndPosition);
         UpdatePath();
     }
 
@@ -33,15 +35,21 @@ public:
     bool PathfindStep();
 private:
     void UpdatePath();
-    static float CalculateManhattanDistance(const USVec2D& _start, const USVec2D& _end);
+    float CalculateHeuristic(const USVec2D& _point);
+    void FillPath(SNode* _end);
+    SNode* GetNodeInVector(std::vector<SNode*>& _vector, const USVec2D& _nodePosition) const;
 private:
     USVec2D m_StartPosition;
     USVec2D m_EndPosition;
 
-    std::shared_ptr<CGrid> m_grid;
-    std::vector<std::shared_ptr<SNode>> m_openNodes;
-    std::vector<std::shared_ptr<SNode>> m_closeNodes;
-    std::vector<std::shared_ptr<SNode>> m_path;
+    USVec2D m_startGridPosition;
+    USVec2D m_endGridPosition;
+
+    CGrid* m_grid;
+    SNode* m_currentNode;
+    std::vector<SNode*> m_openNodes;
+    std::vector<SNode*> m_closeNodes;
+    std::vector<SNode*> m_path;
 
     // Lua configuration
 public:

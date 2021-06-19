@@ -5,7 +5,7 @@
 
 CGrid::CGrid() {}
 
-std::shared_ptr<CGrid> CGrid::Load(const char* _mapFilename, const char* _codeFilename)
+CGrid* CGrid::Load(const char* _mapFilename, const char* _codeFilename)
 {
     if (!_mapFilename || !_codeFilename)
     {
@@ -13,7 +13,7 @@ std::shared_ptr<CGrid> CGrid::Load(const char* _mapFilename, const char* _codeFi
         return nullptr;
     }
 
-    std::shared_ptr<CGrid> grid = std::make_shared<CGrid>();
+    CGrid* grid = new CGrid();
     std::map<char, float> codeMap;
     {
         std::ifstream codeStream;
@@ -94,7 +94,7 @@ float CGrid::GetCost(uint32_t _row, uint32_t _col) const
 
 float CGrid::GetCost(const USVec2D& _gridLocation) const
 {
-    return GetCost(static_cast<uint32_t>(_gridLocation.mX), static_cast<uint32_t>(_gridLocation.mY));
+    return GetCost(static_cast<uint32_t>(_gridLocation.mY), static_cast<uint32_t>(_gridLocation.mX));
 }
 
 USVec2D CGrid::GetSize() const
@@ -108,6 +108,11 @@ USVec2D CGrid::GetRectSize() const
         static_cast<float>(MOAIGfxDevice::Get().GetHeight()) / m_size.mY);
 }
 
+bool CGrid::IsValidPosition(const USVec2D& _position) const
+{
+    return _position.mX >= 0.f && _position.mX < m_size.mX && _position.mY >= 0.f && _position.mY < m_size.mY;
+}
+
 USVec2D CGrid::GridToWorldLocation(const USVec2D& _gridLocation) const
 {
     MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get();
@@ -115,7 +120,7 @@ USVec2D CGrid::GridToWorldLocation(const USVec2D& _gridLocation) const
     const float halfHeight = static_cast<float>(gfxDevice.GetHeight()) / 2.f;
     USVec2D rectSize = GetRectSize();
     USVec2D screenLocation(rectSize.mX * _gridLocation.mX, rectSize.mY * _gridLocation.mY);
-    USVec2D worldLocation = USVec2D(-halfWidth, -halfHeight) - screenLocation;
+    USVec2D worldLocation = screenLocation - USVec2D(halfWidth, halfHeight);
     return worldLocation;
 }
 
@@ -139,9 +144,9 @@ void CGrid::DrawDebug() const
     const float halfHeight = static_cast<float>(gfxDevice.GetHeight()) / 2.f;
     USVec2D rectSize(static_cast<float>(gfxDevice.GetWidth()) / m_size.mX,
                      static_cast<float>(gfxDevice.GetHeight()) / m_size.mY);
-    for (uint32_t row = 0; row < static_cast<uint32_t>(m_size.mY); ++row)
+    for (int32_t row = 0; row < static_cast<int32_t>(m_size.mY); ++row)
     {
-        for (uint32_t col = 0; col < static_cast<uint32_t>(m_size.mX); ++col)
+        for (int32_t col = 0; col < static_cast<int32_t>(m_size.mX); ++col)
         {
             USRect rect;
             rect.mXMin = static_cast<float>(col) * rectSize.mX - halfWidth;
@@ -149,14 +154,18 @@ void CGrid::DrawDebug() const
             rect.mYMin = static_cast<float>(row) * rectSize.mY - halfHeight;
             rect.mYMax = rect.mYMin + rectSize.mY;
 
-            if (static_cast<int32_t>(GetCost(row, col)) == -1)
+            const int32_t cost = static_cast<int32_t>(GetCost(row, col));
+
+            gfxDevice.SetPenColor(0.2f, 0.2f, 0.4f, 1.f);
+            if (cost == -1)
             {
-                gfxDevice.SetPenColor(1.f, 0.7f, 0.2f, 1.f);
                 MOAIDraw::DrawRectFill(rect);
             }
             else
             {
-                gfxDevice.SetPenColor(0.2f, 0.7f, 0.2f, 1.f);
+                gfxDevice.SetPenColor(0.01f + 0.2f * cost, 0.4f, 0.1f, 0.1f);
+                MOAIDraw::DrawRectFill(rect);
+                gfxDevice.SetPenColor(0.1f, 0.1f, 0.1f, 1.f);
                 MOAIDraw::DrawRectOutline(rect);
             }
         }
