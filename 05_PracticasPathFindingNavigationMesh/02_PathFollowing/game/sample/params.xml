@@ -1,0 +1,16 @@
+<root>
+    <params>
+        <max_linear_velocity value="30"/>
+        <max_linear_acceleration value="20"/>
+        <linear_dest_radius value="5"/>
+        <linear_arrive_radius value="15"/>
+
+        <max_angular_velocity value="40"/>
+        <max_angular_acceleration value="20"/>
+        <angular_dest_radius value="2"/>
+        <angular_arrive_radius value="10"/>
+
+        <look_ahead value="2"/>
+        <time_ahead value="1"/>
+    </params>
+</root>

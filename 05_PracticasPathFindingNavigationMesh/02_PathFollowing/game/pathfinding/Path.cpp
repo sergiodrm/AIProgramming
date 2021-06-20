@@ -5,7 +5,7 @@
 
 void CPath::AddPoint(const USVec2D& _point)
 {
-    m_path.push_back(_point);
+    m_path.insert(m_path.begin(), _point);
 }
 
 void CPath::Clear()
