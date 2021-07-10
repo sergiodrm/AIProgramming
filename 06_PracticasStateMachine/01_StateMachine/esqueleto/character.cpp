@@ -82,14 +82,29 @@ void Character::AddSteering(CSteering* _steering, float _weight)
     m_steerings.insert(m_steerings.end(), newSteering);
 }
 
+void Character::TakeDamage(float _amount)
+{
+    m_currentHealth -= _amount;
+    if (m_currentHealth < 0.f)
+    {
+        m_currentHealth = 0.f;
+    }
+}
+
 void Character::MoveTo(const USVec2D& _worldPosition)
 {
     m_steeringTarget = _worldPosition;
 }
 
+void Character::CancelMovement()
+{
+    m_steeringTarget = GetLoc();
+}
+
 void Character::OnStart()
 {
     ReadParams("params.xml", mParams);
+    m_steeringTarget = GetLoc();
 }
 
 void Character::OnStop()
@@ -201,8 +216,8 @@ int Character::_moveTo(lua_State* L)
 int Character::_loadStateMachine(lua_State* L)
 {
     MOAI_LUA_SETUP(Character, "U");
-
-    self->m_stateMachine->Load();
+    const char* file = lua_tostring(L, 2);
+    self->m_stateMachine->Load(file);
     return 0;
 }
 

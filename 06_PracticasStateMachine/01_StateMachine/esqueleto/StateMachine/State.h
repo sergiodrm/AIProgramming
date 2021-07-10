@@ -20,6 +20,7 @@ public:
     void AddEnterAction(CAction* _action);
     void AddStateAction(CAction* _action);
     void AddExitAction(CAction* _action);
+    void AddTransition(CTransition* _transition);
 
 protected:
     static void OverrideAction(CAction*& currentAction_, CAction* _newAction);

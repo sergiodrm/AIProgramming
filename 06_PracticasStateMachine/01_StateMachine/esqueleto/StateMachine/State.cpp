@@ -64,6 +64,14 @@ void CState::AddExitAction(CAction* _action)
     OverrideAction(m_exitAction, _action);
 }
 
+void CState::AddTransition(CTransition* _transition)
+{
+    if (_transition)
+    {
+        m_transitions.push_back(_transition);
+    }
+}
+
 void CState::OverrideAction(CAction*& currentAction_, CAction* _newAction)
 {
     if (_newAction)

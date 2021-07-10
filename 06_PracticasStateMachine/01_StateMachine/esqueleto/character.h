@@ -52,7 +52,11 @@ public:
     const Character* GetTarget() const { return m_target; }
     Character* GetTarget() { return m_target; }
 
+    void TakeDamage(float _amount);
+    bool IsAlive() const { return m_currentHealth > 0.f; }
+
     void MoveTo(const USVec2D& _worldPosition);
+    void CancelMovement();
 
 
 private:
@@ -60,6 +64,8 @@ private:
     float mAngularVelocity;
 
     Params mParams;
+
+    float m_currentHealth {100.f};
 
     /** Path following */
     CPath* m_path;

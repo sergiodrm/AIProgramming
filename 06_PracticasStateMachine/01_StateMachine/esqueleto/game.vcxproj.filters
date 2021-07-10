@@ -52,6 +52,27 @@
     <ClCompile Include="StateMachine\Actions\ChaseAction.cpp">
       <Filter>StateMachine\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="StateMachine\Actions\SetImageAction.cpp">
+      <Filter>StateMachine\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Conditions\CheckTargetDistanceCondition.cpp">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Actions\AttackAction.cpp">
+      <Filter>StateMachine\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Conditions\AndCondition.cpp">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Conditions\IsTargetAliveCondition.cpp">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Conditions\NotCondition.cpp">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Conditions\OrCondition.cpp">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="host\FolderWatcher-win.h">
@@ -107,6 +128,27 @@
     </ClInclude>
     <ClInclude Include="StateMachine\Actions\ChaseAction.h">
       <Filter>StateMachine\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Actions\SetImageAction.h">
+      <Filter>StateMachine\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\CheckTargetDistanceCondition.h">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Actions\AttackAction.h">
+      <Filter>StateMachine\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\AndCondition.h">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\IsTargetAliveCondition.h">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\NotCondition.h">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\OrCondition.h">
+      <Filter>StateMachine\Conditions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
