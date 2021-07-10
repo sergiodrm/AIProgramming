@@ -133,6 +133,7 @@
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="params.cpp" />
     <ClCompile Include="Path.cpp" />
+    <ClCompile Include="StateMachine\Actions\ChaseAction.cpp" />
     <ClCompile Include="StateMachine\State.cpp" />
     <ClCompile Include="StateMachine\StateMachine.cpp" />
     <ClCompile Include="StateMachine\Transition.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="params.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="StateMachine\Actions\Action.h" />
+    <ClInclude Include="StateMachine\Actions\ChaseAction.h" />
     <ClInclude Include="StateMachine\Conditions\Condition.h" />
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateMachine.h" />

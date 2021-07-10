@@ -5,6 +5,7 @@
 #include <params.h>
 
 
+class CStateMachine;
 class CObstacle;
 class CSteering;
 class CPath;
@@ -47,7 +48,11 @@ public:
     const CPath* GetPath() const { return m_path; }
     const std::vector<CObstacle*> GetObstacles() const { return m_obstacles; }
 
-    void AddSteering(CSteering* _steering, float _weight);
+    void AddSteering(CSteering* _steering, float _weight = 1.f);
+    const Character* GetTarget() const { return m_target; }
+    Character* GetTarget() { return m_target; }
+
+    void MoveTo(const USVec2D& _worldPosition);
 
 
 private:
@@ -58,10 +63,18 @@ private:
 
     /** Path following */
     CPath* m_path;
+
     /** Obstacle avoidance */
     std::vector<CObstacle*> m_obstacles;
+
     /** Steering behaviors */
     std::map<CSteering*, float> m_steerings;
+
+    Character* m_target;
+    USVec2D m_steeringTarget;
+
+    /** State machine */
+    CStateMachine* m_stateMachine;
 
     // Lua configuration
 public:
@@ -69,6 +82,10 @@ public:
 private:
     static int _setLinearVel(lua_State* L);
     static int _setAngularVel(lua_State* L);
+    static int _moveTo(lua_State* L);
+    static int _loadStateMachine(lua_State* L);
+    static int _setTarget(lua_State* L);
+    static int _startStateMachine(lua_State* L);
 };
 
 #endif

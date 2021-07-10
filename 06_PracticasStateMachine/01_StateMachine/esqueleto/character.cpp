@@ -9,6 +9,7 @@
 #include "Steerings/ObstacleAvoidance.h"
 #include "Steerings/PathFollowing.h"
 #include "Obstacle.h"
+#include "StateMachine/StateMachine.h"
 
 // ************************************************************************
 namespace Math
@@ -48,11 +49,17 @@ namespace Math
 // ************************************************************************
 
 Character::Character()
-    : mLinearVelocity(0.0f, 0.0f), mAngularVelocity(0.0f), m_path(nullptr)
+    : mLinearVelocity(0.0f, 0.0f), mAngularVelocity(0.0f), m_path(nullptr), m_target(nullptr), m_stateMachine(nullptr)
 {
     RTTI_BEGIN
     RTTI_EXTEND(MOAIEntity2D)
     RTTI_END
+
+    // Add steerings
+    AddSteering(new CArriveSteering(this));
+    AddSteering(new CAlignToMovement(this));
+
+    m_stateMachine = new CStateMachine(this);
 }
 
 Character::~Character()
@@ -75,6 +82,11 @@ void Character::AddSteering(CSteering* _steering, float _weight)
     m_steerings.insert(m_steerings.end(), newSteering);
 }
 
+void Character::MoveTo(const USVec2D& _worldPosition)
+{
+    m_steeringTarget = _worldPosition;
+}
+
 void Character::OnStart()
 {
     ReadParams("params.xml", mParams);
@@ -87,12 +99,17 @@ void Character::OnUpdate(float step)
 {
     MOAIEntity2D::OnUpdate(step);
 
+    if (m_stateMachine)
+    {
+        m_stateMachine->Update(step);
+    }
+
     SSteeringResult steering;
     uint32_t index = 0;
     for (std::map<CSteering*, float>::iterator it = m_steerings.begin(); it != m_steerings.end(); ++it)
     {
         SSteeringResult result;
-        result.Linear += it->first->GetSteering(USVec2D()).Linear * it->second;
+        result.Linear += it->first->GetSteering(m_steeringTarget).Linear * it->second;
         result.Angular += it->first->GetSteering(0.f).Angular * it->second;
         steering += result;
         ++index;
@@ -119,8 +136,12 @@ void Character::DrawDebug()
                                  mParams.dest_radius, 10);
 
 
-    gfxDevice.SetPenColor(0.7f, 0.2f, 0.2f, 1.f);
+    if (m_stateMachine)
+    {
+        m_stateMachine->DrawDebug();
+    }
 
+    gfxDevice.SetPenColor(0.7f, 0.2f, 0.2f, 1.f);
     for (std::map<CSteering*, float>::iterator it = m_steerings.begin(); it != m_steerings.end(); ++it)
     {
         it->first->DrawDebug();
@@ -137,6 +158,10 @@ void Character::RegisterLuaFuncs(MOAILuaState& state)
     luaL_Reg regTable[] = {
             {"setLinearVel", _setLinearVel},
             {"setAngularVel", _setAngularVel},
+            {"moveTo", _moveTo},
+            {"loadStateMachine", _loadStateMachine},
+            {"startStateMachine", _startStateMachine},
+            {"setTarget", _setTarget},
             {nullptr, nullptr}
         };
 
@@ -160,5 +185,39 @@ int Character::_setAngularVel(lua_State* L)
     float angle = state.GetValue<float>(2, 0.0f);
     self->SetAngularVelocity(angle);
 
+    return 0;
+}
+
+int Character::_moveTo(lua_State* L)
+{
+    MOAI_LUA_SETUP(Character, "U");
+
+    float x = state.GetValue<float>(2, 0.f);
+    float y = state.GetValue<float>(3, 0.f);
+    self->MoveTo(USVec2D(x, y));
+    return 0;
+}
+
+int Character::_loadStateMachine(lua_State* L)
+{
+    MOAI_LUA_SETUP(Character, "U");
+
+    self->m_stateMachine->Load();
+    return 0;
+}
+
+int Character::_setTarget(lua_State* L)
+{
+    MOAI_LUA_SETUP(Character, "U");
+
+    self->m_target = state.GetLuaObject<Character>(2, false);
+    return 0;
+}
+
+int Character::_startStateMachine(lua_State* L)
+{
+    MOAI_LUA_SETUP(Character, "U");
+
+    self->m_stateMachine->Start();
     return 0;
 }

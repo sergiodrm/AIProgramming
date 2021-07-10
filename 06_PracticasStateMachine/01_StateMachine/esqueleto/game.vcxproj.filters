@@ -49,6 +49,9 @@
     <ClCompile Include="StateMachine\Transition.cpp">
       <Filter>StateMachine</Filter>
     </ClCompile>
+    <ClCompile Include="StateMachine\Actions\ChaseAction.cpp">
+      <Filter>StateMachine\Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="host\FolderWatcher-win.h">
@@ -101,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="StateMachine\Conditions\Condition.h">
       <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Actions\ChaseAction.h">
+      <Filter>StateMachine\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

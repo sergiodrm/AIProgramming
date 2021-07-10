@@ -13,9 +13,7 @@ CAlignToMovement::CAlignToMovement(Character* character)
 }
 
 CAlignToMovement::~CAlignToMovement()
-{
-    delete m_alignDelegate;
-}
+{}
 
 void CAlignToMovement::OnDestroy()
 {

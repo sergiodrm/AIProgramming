@@ -17,11 +17,19 @@ gfxQuad:setUVRect(0, 0, 1, 1)
   
 prop = MOAIProp2D.new()
 prop:setDeck(gfxQuad)
+enemyProp = MOAIProp2D.new()
+enemyProp:setDeck(gfxQuad)
 
 entity = Character.new()
+enemy = Character.new()
+entity:setTarget(enemy)
+
 -- Add prop to be the renderable for this character
 entity:setProp(prop, layer)
+enemy:setProp(enemyProp, layer)
 -- Start the character (allow calls to OnUpdate)
+entity:loadStateMachine()
+entity:startStateMachine()
 entity:start()
 entity:setLoc(-50, -50)
 entity:setRot(-135)
@@ -38,8 +46,9 @@ mouseX = 0
 mouseY = 0
 
 function onClick(down)
-  entity:setLoc(mouseX, mouseY)
-  entity:setRot(-135)
+  --entity:setLoc(mouseX, mouseY)
+  --entity:setRot(-135)
+  enemy:setLoc(mouseX, mouseY)
 end
 
 function pointerCallback(x, y)

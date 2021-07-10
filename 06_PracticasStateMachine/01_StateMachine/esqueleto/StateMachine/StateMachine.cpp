@@ -3,12 +3,26 @@
 
 #include "State.h"
 #include "Transition.h"
+#include "Actions/ChaseAction.h"
 
-CStateMachine::CStateMachine()
-    : m_currentState(nullptr)
+CStateMachine::CStateMachine(Character* _owner)
+    : m_currentState(nullptr), m_owner(_owner)
 {}
 
-void CStateMachine::Load() {}
+CStateMachine::~CStateMachine()
+{
+    for (CState* it : m_states)
+    {
+        delete it;
+    }
+}
+
+void CStateMachine::Load()
+{
+    CState* chaseState = new CState();
+    chaseState->AddStateAction(new CChaseAction(this));
+    m_states.push_back(chaseState);
+}
 
 void CStateMachine::Start()
 {
@@ -19,20 +33,28 @@ void CStateMachine::Start()
     }
 }
 
-void CStateMachine::Update()
+void CStateMachine::Update(float _deltaTime)
 {
-    // Update current state
-    m_currentState->OnUpdate();
-
-    // Check transitions
-    for (CTransition* it : m_currentState->GetTransition())
+    if (m_currentState)
     {
-        if (it->CanTrigger())
+        // Update current state
+        m_currentState->OnUpdate(_deltaTime);
+
+        // Check transitions
+        for (CTransition* it : m_currentState->GetTransition())
         {
-            m_currentState->OnExit();
-            m_currentState = it->Trigger();
-            m_currentState->OnEnter();
-            return;
+            if (it->CanTrigger())
+            {
+                m_currentState->OnExit();
+                m_currentState = it->Trigger();
+                m_currentState->OnEnter();
+                return;
+            }
         }
     }
+}
+
+void CStateMachine::DrawDebug()
+{
+    m_currentState->DrawDebug();
 }

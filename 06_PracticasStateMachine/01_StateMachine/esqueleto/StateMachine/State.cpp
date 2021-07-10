@@ -19,11 +19,11 @@ void CState::OnEnter()
     }
 }
 
-void CState::OnUpdate()
+void CState::OnUpdate(float _deltaTime)
 {
     if (m_stateAction)
     {
-        m_stateAction->OnUpdate();
+        m_stateAction->OnUpdate(_deltaTime);
     }
 }
 
@@ -39,4 +39,36 @@ void CState::OnExit()
     }
 }
 
+void CState::DrawDebug()
+{
+    if (m_stateAction)
+    {
+        m_stateAction->DrawDebug();
+    }
+}
+
 const StateTransitions& CState::GetTransition() const { return m_transitions; }
+
+void CState::AddEnterAction(CAction* _action)
+{
+    OverrideAction(m_enterAction, _action);
+}
+
+void CState::AddStateAction(CAction* _action)
+{
+    OverrideAction(m_stateAction, _action);
+}
+
+void CState::AddExitAction(CAction* _action)
+{
+    OverrideAction(m_exitAction, _action);
+}
+
+void CState::OverrideAction(CAction*& currentAction_, CAction* _newAction)
+{
+    if (_newAction)
+    {
+        delete currentAction_;
+        currentAction_ = _newAction;
+    }
+}

@@ -12,9 +12,17 @@ public:
     CState();
 
     void OnEnter();
-    void OnUpdate();
+    void OnUpdate(float _deltaTime);
     void OnExit();
+    void DrawDebug();
     const StateTransitions& GetTransition() const;
+
+    void AddEnterAction(CAction* _action);
+    void AddStateAction(CAction* _action);
+    void AddExitAction(CAction* _action);
+
+protected:
+    static void OverrideAction(CAction*& currentAction_, CAction* _newAction);
 
 private:
     CAction* m_enterAction;
