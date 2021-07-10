@@ -4,10 +4,10 @@
 
 class Character;
 
-class CIsTargetAliveCondition : public ICondition
+class CIsAliveCondition : public ICondition
 {
 public:
-    CIsTargetAliveCondition(Character* _target)
+    CIsAliveCondition(Character* _target)
         : m_target(_target) {}
 
     virtual bool Check() const;

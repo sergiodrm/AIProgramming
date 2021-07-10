@@ -101,6 +101,12 @@ void Character::CancelMovement()
     m_steeringTarget = GetLoc();
 }
 
+void Character::Revive()
+{
+    m_currentHealth = 100.f;
+    CancelMovement();
+}
+
 void Character::OnStart()
 {
     ReadParams("params.xml", mParams);
@@ -177,6 +183,7 @@ void Character::RegisterLuaFuncs(MOAILuaState& state)
             {"loadStateMachine", _loadStateMachine},
             {"startStateMachine", _startStateMachine},
             {"setTarget", _setTarget},
+            {"revive", _revive},
             {nullptr, nullptr}
         };
 
@@ -234,5 +241,12 @@ int Character::_startStateMachine(lua_State* L)
     MOAI_LUA_SETUP(Character, "U");
 
     self->m_stateMachine->Start();
+    return 0;
+}
+
+int Character::_revive(lua_State* L)
+{
+    MOAI_LUA_SETUP(Character, "U");
+    self->Revive();
     return 0;
 }

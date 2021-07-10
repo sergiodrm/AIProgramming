@@ -22,33 +22,33 @@
         <transition origin="0" dest="1">
             <condition cond="And">
                 <condition cond="CheckDist" dist="500"/>
-                <condition cond="Alive"/>
+                <condition cond="TargetAlive"/>
             </condition>
         </transition>
         <transition origin="1" dest="0">
             <condition cond="Or">
                 <condition cond="Not">
-                    <condition cond="CheckDist" dist="500">
+                    <condition cond="CheckDist" dist="500"/>
                 </condition>
                 <condition cond="Not">
-                    <condition cond="Alive">
+                    <condition cond="TargetAlive"/>
                 </condition>
             </condition>
         </transition>
 
         <transition origin="1" dest="2">
             <condition cond="And">
-                <condition cond="CheckDist" dist="100">
-                <condition cond="Alive"/>
+                <condition cond="CheckDist" dist="100"/>
+                <condition cond="TargetAlive"/>
             </condition>
         </transition>
         <transition origin="2" dest="1">
             <condition cond="Or">
                 <condition cond="Not">
-                    <condition cond="CheckDist" dist="100">
+                    <condition cond="CheckDist" dist="100"/>
                 </condition>
                 <condition cond="Not">
-                    <condition cond="Alive">
+                    <condition cond="TargetAlive"/>
                 </condition>
             </condition>
         </transition>

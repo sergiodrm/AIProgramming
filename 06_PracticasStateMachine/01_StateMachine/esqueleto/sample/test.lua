@@ -52,13 +52,24 @@ enemy:setProp(enemyProp, layer)
 
 -- Start the character (allow calls to OnUpdate)
 entity:setTarget(enemy)
-entity:loadStateMachine()
+entity:loadStateMachine("characterStateMachine.xml")
 entity:startStateMachine()
 entity:start()
 entity:setLoc(-50, -50)
 entity:setRot(-135)
 entity:setLinearVel(-20, -20)
 --entity:setAngularVel(30)
+
+-- Start the Enemy
+enemy:addImage(idleImage)
+enemy:addImage(alarmImage)
+enemy:addImage(attackImage)
+enemy:addImage(deadImage)
+enemy:addImage(hitImage)
+enemy:addImage(windupImage)
+enemy:loadStateMachine("enemyStateMachine.xml")
+enemy:startStateMachine()
+enemy:start()
 
 -- Enable Debug Draw
 debug = MOAIDrawDebug.get();
@@ -73,6 +84,7 @@ function onClick(down)
   --entity:setLoc(mouseX, mouseY)
   --entity:setRot(-135)
   enemy:setLoc(mouseX, mouseY)
+  enemy:revive()
 end
 
 function pointerCallback(x, y)

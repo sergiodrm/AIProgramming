@@ -11,6 +11,7 @@
 #include "Actions/SetImageAction.h"
 #include "Conditions/AndCondition.h"
 #include "Conditions/CheckTargetDistanceCondition.h"
+#include "Conditions/HitCondition.h"
 #include "Conditions/IsTargetAliveCondition.h"
 #include "Conditions/NotCondition.h"
 #include "Conditions/OrCondition.h"
@@ -98,71 +99,6 @@ void CStateMachine::Load(const char* _filename)
             transition->SetTargetState(stateTo);
         }
     }
-
-
-    ///**
-    // * Conditions
-    // */
-    //CCheckTargetDistanceCondition* idleToChaseCondition = new CCheckTargetDistanceCondition(m_owner);
-    //CCheckTargetDistanceCondition* chaseToIdleCondition = new CCheckTargetDistanceCondition(m_owner);
-    //CCheckTargetDistanceCondition* chaseToAttackCondition = new CCheckTargetDistanceCondition(m_owner);
-    //chaseToAttackCondition->SetTriggerDistance(100.f);
-    //CCheckTargetDistanceCondition* attackToChaseCondition = new CCheckTargetDistanceCondition(m_owner);
-    //attackToChaseCondition->SetTriggerDistance(100.f);
-
-    ///**
-    // * Actions
-    // */
-    //CSetImageAction* setImageToAlarmAction = new CSetImageAction(this);
-    //setImageToAlarmAction->SetImage(EImageId::Alarm);
-    //CSetImageAction* setImageToIdleAction = new CSetImageAction(this);
-    //setImageToIdleAction->SetImage(EImageId::Idle);
-    //CSetImageAction* setImageToAttackAction = new CSetImageAction(this);
-    //setImageToAttackAction->SetImage(EImageId::Attack);
-    //CChaseAction* chaseTargetAction = new CChaseAction(this);
-    //CAttackAction* attackAction = new CAttackAction(this);
-
-    ///** Idle state */
-    //CState* idleState = new CState();
-    //idleState->AddEnterAction(setImageToIdleAction);
-    //m_states.push_back(idleState);
-
-    ///** Chase state */
-    //CState* chaseState = new CState();
-    //chaseState->AddStateAction(chaseTargetAction);
-    //chaseState->AddEnterAction(setImageToAlarmAction);
-    //m_states.push_back(chaseState);
-
-    ///** Attack state */
-    //CState* attackState = new CState();
-    //attackState->AddStateAction(attackAction);
-    //attackState->AddEnterAction(setImageToAttackAction);
-
-    ///** Transition: idle -> chase */
-    //CTransition* idleToChase = new CTransition();
-    //idleToChase->SetCondition(idleToChaseCondition);
-    //idleToChase->SetTargetState(chaseState);
-    //// Add transition to idle state
-    //idleState->AddTransition(idleToChase);
-
-    ///** Transition: chase -> idle */
-    //CTransition* chaseToIdle = new CTransition();
-    //chaseToIdle->SetCondition(new CNotCondition(chaseToIdleCondition));
-    //chaseToIdle->SetTargetState(idleState);
-    //// Add transition to chase state
-    //chaseState->AddTransition(chaseToIdle);
-
-    ///** Transition: chase -> attack */
-    //CTransition* chaseToAttack = new CTransition();
-    //chaseToAttack->SetCondition(chaseToAttackCondition);
-    //chaseToAttack->SetTargetState(attackState);
-    //chaseState->AddTransition(chaseToAttack);
-
-    ///** Transition: chase -> attack */
-    //CTransition* attackToChase = new CTransition();
-    //attackToChase->SetCondition(new CNotCondition(attackToChaseCondition));
-    //attackToChase->SetTargetState(chaseState);
-    //attackState->AddTransition(attackToChase);
 }
 
 void CStateMachine::Start()
@@ -232,7 +168,7 @@ CAction* CStateMachine::ReadActionFromXml(TiXmlElement* _actionElement)
 
 ICondition* CStateMachine::ReadConditionFromXml(TiXmlElement* _conditionElement)
 {
-    const char* conditionStr = _conditionElement->Value();
+    const char* conditionStr = _conditionElement->Attribute("cond");
     if (strcmp(conditionStr, "And") == 0)
     {
         CAndCondition* condition = new CAndCondition();
@@ -262,9 +198,19 @@ ICondition* CStateMachine::ReadConditionFromXml(TiXmlElement* _conditionElement)
         CNotCondition* condition = new CNotCondition(ReadConditionFromXml(_conditionElement->FirstChildElement()));
         return condition;
     }
+    if (strcmp(conditionStr, "TargetAlive") == 0)
+    {
+        CIsAliveCondition* condition = new CIsAliveCondition(m_owner->GetTarget());
+        return condition;
+    }
     if (strcmp(conditionStr, "Alive") == 0)
     {
-        CIsTargetAliveCondition* condition = new CIsTargetAliveCondition(m_owner->GetTarget());
+        CIsAliveCondition* condition = new CIsAliveCondition(m_owner);
+        return condition;
+    }
+    if (strcmp(conditionStr, "Hit") == 0)
+    {
+        CHitCondition* condition = new CHitCondition(m_owner);
         return condition;
     }
     if (strcmp(conditionStr, "CheckDist") == 0)

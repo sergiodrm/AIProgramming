@@ -8,6 +8,16 @@ CAttackAction::CAttackAction(CStateMachine* _owner)
     : CAction(_owner), m_damageAmount(30.f), m_timeBetweenAttacks(2.f), m_timeUntilNextAttack(0.f)
 {}
 
+void CAttackAction::OnStart()
+{
+    m_ownerStateMachine->GetOwner()->GetTarget()->SetUnderAttack(true);
+}
+
+void CAttackAction::OnEnd()
+{
+    m_ownerStateMachine->GetOwner()->GetTarget()->SetUnderAttack(false);
+}
+
 void CAttackAction::OnUpdate(float _deltaTime)
 {
     CAction::OnUpdate(_deltaTime);

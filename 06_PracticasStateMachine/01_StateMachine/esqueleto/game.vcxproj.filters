@@ -73,6 +73,9 @@
     <ClCompile Include="StateMachine\Conditions\OrCondition.cpp">
       <Filter>StateMachine\Conditions</Filter>
     </ClCompile>
+    <ClCompile Include="StateMachine\Conditions\HitCondition.cpp">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="host\FolderWatcher-win.h">
@@ -148,6 +151,9 @@
       <Filter>StateMachine\Conditions</Filter>
     </ClInclude>
     <ClInclude Include="StateMachine\Conditions\OrCondition.h">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\HitCondition.h">
       <Filter>StateMachine\Conditions</Filter>
     </ClInclude>
   </ItemGroup>

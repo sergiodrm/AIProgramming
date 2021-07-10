@@ -138,6 +138,7 @@
     <ClCompile Include="StateMachine\Actions\SetImageAction.cpp" />
     <ClCompile Include="StateMachine\Conditions\AndCondition.cpp" />
     <ClCompile Include="StateMachine\Conditions\CheckTargetDistanceCondition.cpp" />
+    <ClCompile Include="StateMachine\Conditions\HitCondition.cpp" />
     <ClCompile Include="StateMachine\Conditions\IsTargetAliveCondition.cpp" />
     <ClCompile Include="StateMachine\Conditions\NotCondition.cpp" />
     <ClCompile Include="StateMachine\Conditions\OrCondition.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="StateMachine\Conditions\AndCondition.h" />
     <ClInclude Include="StateMachine\Conditions\CheckTargetDistanceCondition.h" />
     <ClInclude Include="StateMachine\Conditions\Condition.h" />
+    <ClInclude Include="StateMachine\Conditions\HitCondition.h" />
     <ClInclude Include="StateMachine\Conditions\IsTargetAliveCondition.h" />
     <ClInclude Include="StateMachine\Conditions\NotCondition.h" />
     <ClInclude Include="StateMachine\Conditions\OrCondition.h" />

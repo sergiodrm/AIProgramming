@@ -54,9 +54,12 @@ public:
 
     void TakeDamage(float _amount);
     bool IsAlive() const { return m_currentHealth > 0.f; }
+    bool IsUnderAttack() const { return m_underAttack; }
+    void SetUnderAttack(bool _underAttack) { m_underAttack = _underAttack; }
 
     void MoveTo(const USVec2D& _worldPosition);
     void CancelMovement();
+    void Revive();
 
 
 private:
@@ -66,6 +69,7 @@ private:
     Params mParams;
 
     float m_currentHealth {100.f};
+    bool m_underAttack {false};
 
     /** Path following */
     CPath* m_path;
@@ -92,6 +96,7 @@ private:
     static int _loadStateMachine(lua_State* L);
     static int _setTarget(lua_State* L);
     static int _startStateMachine(lua_State* L);
+    static int _revive(lua_State* L);
 };
 
 #endif

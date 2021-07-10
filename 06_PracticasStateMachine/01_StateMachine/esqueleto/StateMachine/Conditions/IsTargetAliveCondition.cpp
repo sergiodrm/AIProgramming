@@ -3,7 +3,7 @@
 
 #include "character.h"
 
-bool CIsTargetAliveCondition::Check() const
+bool CIsAliveCondition::Check() const
 {
     if (m_target)
     {
