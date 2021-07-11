@@ -55,6 +55,14 @@ void CBehaviorTree::Tick(float _deltaTime)
     }
 }
 
+void CBehaviorTree::DrawDebug() const
+{
+    if (m_root)
+    {
+        m_root->DrawDebug();
+    }
+}
+
 Character* CBehaviorTree::GetOwner() { return m_owner; }
 
 CGroup* CBehaviorTree::ReadGroupFromXml(TiXmlElement* _groupElement)

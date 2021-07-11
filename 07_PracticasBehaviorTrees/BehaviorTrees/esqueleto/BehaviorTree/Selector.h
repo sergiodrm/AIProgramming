@@ -6,6 +6,7 @@ class CSelector : public CGroup
 {
 public:
     CSelector(CBehaviorTree* _owner);
+    virtual void DrawDebug() const override;
 protected:
     virtual void OnEnter() override;
     virtual EStatus OnUpdate(float _deltaTime) override;

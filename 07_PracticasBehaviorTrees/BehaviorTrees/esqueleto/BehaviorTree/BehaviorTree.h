@@ -13,6 +13,7 @@ public:
 
     void Load(const char* _file);
     void Tick(float _deltaTime);
+    void DrawDebug() const;
     Character* GetOwner();
 
 protected:

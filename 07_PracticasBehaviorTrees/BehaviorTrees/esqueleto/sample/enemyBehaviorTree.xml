@@ -1,3 +1,18 @@
 <bt>
-    
+    <group type="sel">
+        <group type="sel">
+            <condition cond="Not">
+                <condition cond="Alive"/>
+            </condition>
+            <behavior type="SetImage" id="Dead"/>
+        </group>
+        <group type="sel">
+            <condition cond="Hit"></condition>
+            <behavior type="SetImage" id="Hit"/>
+            <behavior type="Wait" time="1"/>
+        </group>
+        <group type="sel">
+            <behavior type="SetImage" id="Idle"/>
+        </group>
+    </group>
 </bt>

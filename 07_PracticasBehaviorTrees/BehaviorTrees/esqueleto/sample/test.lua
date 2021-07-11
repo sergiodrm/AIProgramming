@@ -71,6 +71,8 @@ enemy:addImage(hitImage)
 enemy:addImage(windupImage)
 --enemy:loadStateMachine("enemyStateMachine.xml")
 --enemy:startStateMachine()
+enemy:loadBehaviorTree("enemyBehaviorTree.xml")
+enemy:startBehaviorTree()
 enemy:start()
 
 -- Enable Debug Draw

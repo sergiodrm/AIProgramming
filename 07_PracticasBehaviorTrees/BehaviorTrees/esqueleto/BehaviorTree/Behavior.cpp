@@ -6,7 +6,7 @@ CBehavior::CBehavior(CBehaviorTree* _owner)
 
 EStatus CBehavior::Tick(float _deltaTime)
 {
-    if (m_status == EStatus::Invalid)
+    if (m_status != EStatus::Running)
     {
         OnEnter();
     }
@@ -19,6 +19,9 @@ EStatus CBehavior::Tick(float _deltaTime)
     }
     return m_status;
 }
+
+void CBehavior::DrawDebug() const
+{}
 
 EStatus CBehavior::OnUpdate(float _deltaTime) { return EStatus::Success; }
 void CBehavior::OnEnter() {}

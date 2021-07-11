@@ -157,18 +157,16 @@ void Character::DrawDebug()
 
     // Draw target position
     gfxDevice.SetPenColor(0.7f, 0.2f, 0.2f, 1.f);
-    MOAIDraw::DrawPoint(mParams.targetPosition.mX, mParams.targetPosition.mY);
-    // Arrive radius
-    MOAIDraw::DrawEllipseOutline(mParams.targetPosition.mX, mParams.targetPosition.mY, mParams.arrive_radius,
-                                 mParams.arrive_radius, 10);
-    // Dest radius
-    MOAIDraw::DrawEllipseOutline(mParams.targetPosition.mX, mParams.targetPosition.mY, mParams.dest_radius,
-                                 mParams.dest_radius, 10);
+    MOAIDraw::DrawEllipseOutline(m_steeringTarget.mX, m_steeringTarget.mY, 100.f, 100.f, 10);
 
 
     if (m_stateMachine)
     {
         m_stateMachine->DrawDebug();
+    }
+    if (m_behaviorTree)
+    {
+        m_behaviorTree->DrawDebug();
     }
 
     gfxDevice.SetPenColor(0.7f, 0.2f, 0.2f, 1.f);

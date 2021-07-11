@@ -16,6 +16,7 @@ public:
     CBehavior(CBehaviorTree* _owner);
 
     EStatus Tick(float _deltaTime);
+    virtual void DrawDebug() const;
 
 protected:
     virtual EStatus OnUpdate(float _deltaTime);

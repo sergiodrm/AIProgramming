@@ -6,6 +6,18 @@
 CSequence::CSequence(CBehaviorTree* _owner)
     : CGroup(_owner), m_currentChild(0) {}
 
+void CSequence::DrawDebug() const
+{
+    if (m_condition)
+    {
+        m_condition->DrawDebug();
+    }
+    if (m_currentChild < static_cast<int>(m_behaviors.size()))
+    {
+        m_behaviors.at(m_currentChild)->DrawDebug();
+    }
+}
+
 void CSequence::OnEnter()
 {
     m_currentChild = 0;
@@ -44,5 +56,5 @@ EStatus CSequence::OnUpdate(float _deltaTime)
 
 void CSequence::OnExit()
 {
-    m_currentChild = 0;
+    //m_currentChild = 0;
 }

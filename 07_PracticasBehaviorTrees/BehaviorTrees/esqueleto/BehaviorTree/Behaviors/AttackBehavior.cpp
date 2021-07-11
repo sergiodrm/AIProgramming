@@ -13,13 +13,34 @@ CAttackBehavior::CAttackBehavior(CBehaviorTree* _owner)
     }
 }
 
+void CAttackBehavior::DrawDebug() const
+{
+    MOAIDraw::DrawEllipseFill(100.f, 100.f, 10.f, 10.f, 20);
+}
+
 void CAttackBehavior::SetDamage(float _damage)
 {
     m_damage = _damage;
+}
+
+void CAttackBehavior::OnEnter()
+{
+    if (m_target)
+    {
+        m_target->SetUnderAttack(true);
+    }
 }
 
 EStatus CAttackBehavior::OnUpdate(float _deltaTime)
 {
     m_target->TakeDamage(m_damage);
     return EStatus::Success;
+}
+
+void CAttackBehavior::OnExit()
+{
+    if (m_target)
+    {
+        m_target->SetUnderAttack(false);
+    }
 }

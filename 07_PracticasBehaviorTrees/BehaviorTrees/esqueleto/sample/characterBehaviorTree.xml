@@ -5,14 +5,14 @@
             <condition cond="TargetAlive"/>
             <!-- Close enough, can attack -->
             <group type="seq">
-                <condition cond="CheckDist" dist="200"/>
-                <behavior type="SetImage" id="Attack"/>
+                <condition cond="CheckDist" dist="100"/>
                 <behavior type="Attack" damage="30"/>
+                <behavior type="SetImage" id="Attack"/>
                 <behavior type="Wait" time="2"/>
             </group>
             <!-- Not close enough, chase -->
             <group type="seq">
-                <condition cond="CheckDist" dist="500"/>
+                <condition cond="CheckDist" dist="300"/>
                 <behavior type="SetImage" id="Alarm"/>
                 <behavior type="Chase" dist="100"/>
             </group>
