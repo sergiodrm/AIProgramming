@@ -55,6 +55,4 @@ EStatus CSelector::OnUpdate(float _deltaTime)
 }
 
 void CSelector::OnExit()
-{
-    //m_currentChild = 0;
-}
+{}

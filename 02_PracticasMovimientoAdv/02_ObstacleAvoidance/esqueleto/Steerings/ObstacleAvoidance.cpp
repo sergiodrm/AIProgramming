@@ -1,6 +1,6 @@
 #include <stdafx.h>
 #include "ObstacleAvoidance.h"
-
+#include "../Obstacle.h"
 #include "character.h"
 
 const SSteeringResult& CObstacleAvoidance::GetSteering(const USVec2D& _target)
@@ -18,7 +18,7 @@ const SSteeringResult& CObstacleAvoidance::GetSteering(const USVec2D& _target)
     USVec2D characterDirection = m_character->GetLinearVelocity();
     characterDirection.NormSafe();
 
-    for (const std::shared_ptr<CObstacle>& obstacle : obstacles)
+    for (const std::shared_ptr<CObstacle> obstacle : obstacles)
     {
         const USVec2D localObstacleLocation = obstacle->GetPosition() - m_character->GetLoc();
         const float proj = localObstacleLocation.Dot(characterDirection);

@@ -43,6 +43,7 @@ public:
     float GetAngularVelocity() const { return mAngularVelocity; }
     const Params& GetParams() const { return mParams; }
     const CPath& GetPath() const { return mPath; }
+    std::vector<CObstacle*>& GetObstacles() { return m_obstacles; }
 
     void SetTarget(const USVec2D& target) { mParams.targetPosition = target; }
 
@@ -52,7 +53,7 @@ private:
 
     Params mParams;
     CPath mPath;
-    std::vector<std::unique_ptr<CObstacle>> m_obstacles;
+    std::vector<CObstacle*> m_obstacles;
 
     std::vector<std::unique_ptr<CSteering>> m_steerings;
 

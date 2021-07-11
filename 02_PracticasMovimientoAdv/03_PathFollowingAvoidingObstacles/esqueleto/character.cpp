@@ -47,16 +47,17 @@ namespace Math
 
 // ************************************************************************
 
-Character::Character() : mLinearVelocity(0.0f, 0.0f), mAngularVelocity(0.0f)
+Character::Character()
+    : mLinearVelocity(0.0f, 0.0f), mAngularVelocity(0.0f)
 {
     RTTI_BEGIN
     RTTI_EXTEND(MOAIEntity2D)
     RTTI_END
 
     m_steerings.push_back(std::make_unique<CObstacleAvoidance>(this));
-    m_weights.push_back(0.8f);
+    m_weights.push_back(0.9f);
     m_steerings.push_back(std::make_unique<CPathFollowing>(this));
-    m_weights.push_back(0.2f);
+    m_weights.push_back(0.4f);
     m_steerings.push_back(std::make_unique<CAlignToMovement>(this));
     m_weights.push_back(1.f);
 }

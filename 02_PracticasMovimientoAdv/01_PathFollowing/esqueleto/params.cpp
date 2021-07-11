@@ -101,6 +101,11 @@ bool ReadParams(const char* filename, Params& params)
     {
         paramElem->Attribute("value", &params.time_ahead);
     }
+    paramElem = hParams.FirstChildElement("obstacle_look_ahead").Element();
+    if (paramElem)
+    {
+        paramElem->Attribute("value", &params.obstacle_look_ahead);
+    }
 
 
     return true;

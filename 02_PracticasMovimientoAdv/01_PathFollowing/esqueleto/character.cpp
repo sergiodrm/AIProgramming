@@ -46,7 +46,8 @@ namespace Math
 
 // ************************************************************************
 
-Character::Character() : mLinearVelocity(0.0f, 0.0f), mAngularVelocity(0.0f)
+Character::Character()
+    : mLinearVelocity(0.0f, 0.0f), mAngularVelocity(0.0f)
 {
     RTTI_BEGIN
     RTTI_EXTEND(MOAIEntity2D)
@@ -59,6 +60,10 @@ Character::Character() : mLinearVelocity(0.0f, 0.0f), mAngularVelocity(0.0f)
 
 Character::~Character()
 {
+    for (CObstacle* it : m_obstacles)
+    {
+        delete it;
+    }
     m_steerings.clear();
 }
 
@@ -114,7 +119,7 @@ void Character::DrawDebug()
     {
         it->DrawDebug();
     }
-    for (std::unique_ptr<CObstacle>& it : m_obstacles)
+    for (CObstacle* it : m_obstacles)
     {
         it->DrawDebug();
     }

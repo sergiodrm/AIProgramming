@@ -1,12 +1,11 @@
 #pragma once
-
-#include "Obstacle.h"
 #include "Steering.h"
 
 class CObstacleAvoidance : public CSteering
 {
 public:
-    CObstacleAvoidance(Character* _character) : CSteering(_character) {}
+    CObstacleAvoidance(Character* _character)
+        : CSteering(_character) {}
 
     const SSteeringResult& GetSteering(const USVec2D& _target) override;
     void DrawDebug() const override;
