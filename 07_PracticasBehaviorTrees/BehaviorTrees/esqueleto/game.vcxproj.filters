@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="host\FolderWatcher-win.cpp">
+      <Filter>host</Filter>
+    </ClCompile>
+    <ClCompile Include="host\GlutHost.cpp">
+      <Filter>host</Filter>
+    </ClCompile>
+    <ClCompile Include="host\GlutHostMain.cpp">
+      <Filter>host</Filter>
+    </ClCompile>
+    <ClCompile Include="host\ParticlePresets.cpp">
+      <Filter>host</Filter>
+    </ClCompile>
+    <ClCompile Include="character.cpp" />
+    <ClCompile Include="gameConfig.cpp" />
+    <ClCompile Include="params.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Path.cpp" />
+    <ClCompile Include="Steerings\AlignToMovement.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
+    <ClCompile Include="Steerings\ArriveSteering.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
+    <ClCompile Include="Steerings\SeekSteering.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
+    <ClCompile Include="Steerings\Steering.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="Steerings\ObstacleAvoidance.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
+    <ClCompile Include="Steerings\PathFollowing.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
+    <ClCompile Include="Steerings\Align.cpp">
+      <Filter>Steerings</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\State.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\StateMachine.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Transition.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Actions\ChaseAction.cpp">
+      <Filter>StateMachine\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Actions\SetImageAction.cpp">
+      <Filter>StateMachine\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Conditions\CheckTargetDistanceCondition.cpp">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Actions\AttackAction.cpp">
+      <Filter>StateMachine\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Conditions\AndCondition.cpp">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Conditions\IsTargetAliveCondition.cpp">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Conditions\NotCondition.cpp">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Conditions\OrCondition.cpp">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Conditions\HitCondition.cpp">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\Behavior.cpp">
+      <Filter>BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\Sequence.cpp">
+      <Filter>BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\Selector.cpp">
+      <Filter>BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\BehaviorTree.cpp">
+      <Filter>BehaviorTrees</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\Conditions\AndCondition.cpp">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\Conditions\CheckTargetDistanceCondition.cpp">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\Conditions\HitCondition.cpp">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\Conditions\IsTargetAliveCondition.cpp">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\Conditions\NotCondition.cpp">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\Conditions\OrCondition.cpp">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="host\FolderWatcher-win.h">
+      <Filter>host</Filter>
+    </ClInclude>
+    <ClInclude Include="host\GlutHost.h">
+      <Filter>host</Filter>
+    </ClInclude>
+    <ClInclude Include="host\ParticlePresets.h">
+      <Filter>host</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="character.h" />
+    <ClInclude Include="gameConfig.h" />
+    <ClInclude Include="params.h" />
+    <ClInclude Include="Path.h" />
+    <ClInclude Include="Steerings\AlignToMovement.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
+    <ClInclude Include="Steerings\ArriveSteering.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
+    <ClInclude Include="Steerings\SeekSteering.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
+    <ClInclude Include="Steerings\Steering.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Steerings\ObstacleAvoidance.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
+    <ClInclude Include="Steerings\PathFollowing.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
+    <ClInclude Include="Steerings\Align.h">
+      <Filter>Steerings</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\State.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\StateMachine.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Transition.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Actions\Action.h">
+      <Filter>StateMachine\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\Condition.h">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Actions\ChaseAction.h">
+      <Filter>StateMachine\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Actions\SetImageAction.h">
+      <Filter>StateMachine\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\CheckTargetDistanceCondition.h">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Actions\AttackAction.h">
+      <Filter>StateMachine\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\AndCondition.h">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\IsTargetAliveCondition.h">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\NotCondition.h">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\OrCondition.h">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Conditions\HitCondition.h">
+      <Filter>StateMachine\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Behavior.h">
+      <Filter>BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Group.h">
+      <Filter>BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Sequence.h">
+      <Filter>BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Selector.h">
+      <Filter>BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\BehaviorTree.h">
+      <Filter>BehaviorTrees</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Conditions\AndCondition.h">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Conditions\CheckTargetDistanceCondition.h">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Conditions\Condition.h">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Conditions\HitCondition.h">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Conditions\IsTargetAliveCondition.h">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Conditions\NotCondition.h">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Conditions\OrCondition.h">
+      <Filter>BehaviorTrees\Conditions</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="host">
+      <UniqueIdentifier>{87717a51-4516-4c06-a1de-c6b89a5c16e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sample">
+      <UniqueIdentifier>{dafee91e-18b1-4dd7-a488-726565484f1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Steerings">
+      <UniqueIdentifier>{88790e88-6ed4-4a47-9636-99570d861aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachine">
+      <UniqueIdentifier>{545b70d0-a1cf-4d14-b6be-e9d570fc5286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachine\Actions">
+      <UniqueIdentifier>{659db396-d3b2-4290-89dc-4770a650e77b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachine\Conditions">
+      <UniqueIdentifier>{e9da2b68-a1e8-44f9-95b6-9250014bd24c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviorTrees">
+      <UniqueIdentifier>{d2143ebe-2a73-48e6-9ef1-d8180a0f8cf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviorTrees\Behaviors">
+      <UniqueIdentifier>{5cf4b8e6-12df-4cef-bad3-a6b324318ef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BehaviorTrees\Conditions">
+      <UniqueIdentifier>{eaccfe62-52ba-4216-b46f-44144ddba889}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sample\test.lua">
+      <Filter>sample</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="sample\params.xml">
+      <Filter>sample</Filter>
+    </Xml>
+    <Xml Include="sample\path.xml">
+      <Filter>sample</Filter>
+    </Xml>
+    <Xml Include="sample\obstacles.xml">
+      <Filter>sample</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>

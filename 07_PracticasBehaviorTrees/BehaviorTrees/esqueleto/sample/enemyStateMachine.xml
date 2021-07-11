@@ -1,0 +1,40 @@
+<sm>
+    <states>
+        <!-- Idle state -->
+        <state>
+            <enter action="SetImage" image="Idle"/>
+        </state>
+        <!-- Hit state -->
+        <state>
+            <enter action="SetImage" image="Hit"/>
+        </state>
+        <!-- Dead state -->
+        <state>
+            <enter action="SetImage" image="Dead"/>
+        </state>
+    </states>
+
+    <transitions>
+        <transition origin="0" dest="1">
+            <condition cond="Hit"/>
+        </transition>
+        <transition origin="1" dest="0">
+            <condition cond="Not">
+                <condition cond="Hit"/>
+            </condition>
+        </transition>
+        <transition origin="0" dest="2">
+            <condition cond="Not">
+                <condition cond="Alive"/>
+            </condition>
+        </transition>
+        <transition origin="1" dest="2">
+            <condition cond="Not">
+                <condition cond="Alive"/>
+            </condition>
+        </transition>
+        <transition origin="2" dest="0">
+            <condition cond="Alive"/>
+        </transition>
+    </transitions>
+</sm>
