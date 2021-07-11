@@ -8,6 +8,10 @@
 #include "Group.h"
 #include "Selector.h"
 #include "Sequence.h"
+#include "Behaviors/AttackBehavior.h"
+#include "Behaviors/ChaseBehavior.h"
+#include "Behaviors/SetImageBehavior.h"
+#include "Behaviors/WaitBehavior.h"
 #include "Conditions/AndCondition.h"
 #include "Conditions/CheckTargetDistanceCondition.h"
 #include "Conditions/HitCondition.h"
@@ -38,7 +42,7 @@ void CBehaviorTree::Load(const char* _file)
     }
 
     TiXmlHandle hBehaviorTree(pElem);
-    TiXmlHandle hRootNode = hBehaviorTree.FirstChildElement("bt");
+    TiXmlHandle hRootNode = hBehaviorTree.FirstChildElement();
 
     m_root = ReadGroupFromXml(hRootNode.Element());
 }
@@ -51,17 +55,19 @@ void CBehaviorTree::Tick(float _deltaTime)
     }
 }
 
+Character* CBehaviorTree::GetOwner() { return m_owner; }
+
 CGroup* CBehaviorTree::ReadGroupFromXml(TiXmlElement* _groupElement)
 {
     const char* typeStr = _groupElement->Attribute("type");
     CGroup* group = nullptr;
     if (strcmp(typeStr, "sel") == 0)
     {
-        group = new CSelector();
+        group = new CSelector(this);
     }
     else if (strcmp(typeStr, "seq") == 0)
     {
-        group = new CSequence();
+        group = new CSequence(this);
     }
 
     for (TiXmlElement* child = _groupElement->FirstChildElement(); child != nullptr; child = child->
@@ -92,7 +98,35 @@ CBehavior* CBehaviorTree::ReadBehaviorFromXml(TiXmlElement* _behaviorElement)
 {
     const char* typeStr = _behaviorElement->Attribute("type");
 
-    // @todo
+    if (strcmp(typeStr, "Attack") == 0)
+    {
+        CAttackBehavior* behavior = new CAttackBehavior(this);
+        const float damage = atof(_behaviorElement->Attribute("damage"));
+        behavior->SetDamage(damage);
+        return behavior;
+    }
+    if (strcmp(typeStr, "Chase") == 0)
+    {
+        CChaseBehavior* behavior = new CChaseBehavior(this);
+        const float dist = atof(_behaviorElement->Attribute("dist"));
+        behavior->SetDistance(dist);
+        return behavior;
+    }
+    if (strcmp(typeStr, "SetImage") == 0)
+    {
+        CSetImageBehavior* behavior = new CSetImageBehavior(this);
+        const EImageId id = ImageIdFromStr(_behaviorElement->Attribute("id"));
+        behavior->SetImage(id);
+        return behavior;
+    }
+    if (strcmp(typeStr, "Wait") == 0)
+    {
+        CWaitBehavior* behavior = new CWaitBehavior(this);
+        const float time = atof(_behaviorElement->Attribute("time"));
+        behavior->SetTime(time);
+        return behavior;
+    }
+
     return nullptr;
 }
 

@@ -5,12 +5,11 @@
 class CSequence : public CGroup
 {
 public:
-    CSequence();
+    CSequence(CBehaviorTree* _owner);
 protected:
     virtual void OnEnter() override;
     virtual EStatus OnUpdate(float _deltaTime) override;
+    virtual void OnExit() override;
 
     int m_currentChild;
-
-    std::vector<CBehavior*> m_behaviors;
 };

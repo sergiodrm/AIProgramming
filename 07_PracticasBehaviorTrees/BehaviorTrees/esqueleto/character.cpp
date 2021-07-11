@@ -9,6 +9,7 @@
 #include "Steerings/ObstacleAvoidance.h"
 #include "Steerings/PathFollowing.h"
 #include "Obstacle.h"
+#include "BehaviorTree/BehaviorTree.h"
 #include "StateMachine/StateMachine.h"
 
 // ************************************************************************
@@ -59,7 +60,8 @@ Character::Character()
     AddSteering(new CArriveSteering(this));
     AddSteering(new CAlignToMovement(this));
 
-    m_stateMachine = new CStateMachine(this);
+    //m_stateMachine = new CStateMachine(this);
+    m_behaviorTree = new CBehaviorTree(this);
 }
 
 Character::~Character()
@@ -73,6 +75,9 @@ Character::~Character()
         }
     }
     m_steerings.clear();
+
+    //delete m_stateMachine;
+    delete m_behaviorTree;
 }
 
 void Character::AddSteering(CSteering* _steering, float _weight)
@@ -123,6 +128,10 @@ void Character::OnUpdate(float step)
     if (m_stateMachine)
     {
         m_stateMachine->Update(step);
+    }
+    if (m_behaviorTree)
+    {
+        m_behaviorTree->Tick(step);
     }
 
     SSteeringResult steering;
@@ -184,6 +193,8 @@ void Character::RegisterLuaFuncs(MOAILuaState& state)
             {"startStateMachine", _startStateMachine},
             {"setTarget", _setTarget},
             {"revive", _revive},
+            {"loadBehaviorTree", _loadBehaviorTree},
+            {"startBehaviorTree", _startBehaviorTree},
             {nullptr, nullptr}
         };
 
@@ -248,5 +259,19 @@ int Character::_revive(lua_State* L)
 {
     MOAI_LUA_SETUP(Character, "U");
     self->Revive();
+    return 0;
+}
+
+int Character::_loadBehaviorTree(lua_State* L)
+{
+    MOAI_LUA_SETUP(Character, "U");
+    const char* file = lua_tostring(L, 2);
+    self->m_behaviorTree->Load(file);
+    return 0;
+}
+
+int Character::_startBehaviorTree(lua_State* L)
+{
+    MOAI_LUA_SETUP(Character, "U");
     return 0;
 }

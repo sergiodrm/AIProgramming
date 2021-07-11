@@ -106,6 +106,18 @@
     <ClCompile Include="BehaviorTree\Conditions\OrCondition.cpp">
       <Filter>BehaviorTrees\Conditions</Filter>
     </ClCompile>
+    <ClCompile Include="BehaviorTree\Behaviors\AttackBehavior.cpp">
+      <Filter>BehaviorTrees\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\Behaviors\ChaseBehavior.cpp">
+      <Filter>BehaviorTrees\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\Behaviors\SetImageBehavior.cpp">
+      <Filter>BehaviorTrees\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorTree\Behaviors\WaitBehavior.cpp">
+      <Filter>BehaviorTrees\Behaviors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="host\FolderWatcher-win.h">
@@ -221,6 +233,18 @@
     </ClInclude>
     <ClInclude Include="BehaviorTree\Conditions\OrCondition.h">
       <Filter>BehaviorTrees\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Behaviors\AttackBehavior.h">
+      <Filter>BehaviorTrees\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Behaviors\ChaseBehavior.h">
+      <Filter>BehaviorTrees\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Behaviors\SetImageBehavior.h">
+      <Filter>BehaviorTrees\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorTree\Behaviors\WaitBehavior.h">
+      <Filter>BehaviorTrees\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

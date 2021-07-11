@@ -5,6 +5,7 @@
 #include <params.h>
 
 
+class CBehaviorTree;
 class CStateMachine;
 class CObstacle;
 class CSteering;
@@ -85,6 +86,8 @@ private:
 
     /** State machine */
     CStateMachine* m_stateMachine;
+    /** Behavior tree */
+    CBehaviorTree* m_behaviorTree;
 
     // Lua configuration
 public:
@@ -97,6 +100,8 @@ private:
     static int _setTarget(lua_State* L);
     static int _startStateMachine(lua_State* L);
     static int _revive(lua_State* L);
+    static int _loadBehaviorTree(lua_State* L);
+    static int _startBehaviorTree(lua_State* L);
 };
 
 #endif

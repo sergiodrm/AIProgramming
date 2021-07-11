@@ -3,8 +3,8 @@
 
 #include "Conditions/Condition.h"
 
-CSequence::CSequence()
-    : CGroup(), m_currentChild(0) {}
+CSequence::CSequence(CBehaviorTree* _owner)
+    : CGroup(_owner), m_currentChild(0) {}
 
 void CSequence::OnEnter()
 {
@@ -13,28 +13,36 @@ void CSequence::OnEnter()
 
 EStatus CSequence::OnUpdate(float _deltaTime)
 {
-    while (true)
+    if (m_behaviors.size() > 0)
     {
-        if (m_condition)
+        while (true)
         {
-            if (!m_condition->Check())
+            if (m_condition)
             {
-                return EStatus::Fail;
+                if (!m_condition->Check())
+                {
+                    return EStatus::Fail;
+                }
             }
-        }
-        const EStatus childStatus = m_behaviors.at(m_currentChild)->Tick(_deltaTime);
+            const EStatus childStatus = m_behaviors.at(m_currentChild)->Tick(_deltaTime);
 
-        if (childStatus != EStatus::Success)
-        {
-            return childStatus;
-        }
+            if (childStatus != EStatus::Success)
+            {
+                return childStatus;
+            }
 
-        ++m_currentChild;
+            ++m_currentChild;
 
-        if (m_currentChild == static_cast<int>(m_behaviors.size()))
-        {
-            return EStatus::Success;
+            if (m_currentChild == static_cast<int>(m_behaviors.size()))
+            {
+                return EStatus::Success;
+            }
         }
     }
     return EStatus::Invalid;
+}
+
+void CSequence::OnExit()
+{
+    m_currentChild = 0;
 }

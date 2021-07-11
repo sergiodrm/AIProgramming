@@ -2,18 +2,23 @@
     <group type="sel">
         <!-- Attack nodes -->
         <group type="sel">
-            <condition cond="Alive"/>
-            <group type="sel">
-                <condition cond="CheckDistance" dist="100"/>
-                <behavior type="Attack"/>
+            <condition cond="TargetAlive"/>
+            <!-- Close enough, can attack -->
+            <group type="seq">
+                <condition cond="CheckDist" dist="200"/>
+                <behavior type="SetImage" id="Attack"/>
+                <behavior type="Attack" damage="30"/>
+                <behavior type="Wait" time="2"/>
             </group>
-            <group type="sel">
-                <condition cond="CheckDistance" dist="500"/>
-                <behavior type="Chase"/>
+            <!-- Not close enough, chase -->
+            <group type="seq">
+                <condition cond="CheckDist" dist="500"/>
+                <behavior type="SetImage" id="Alarm"/>
+                <behavior type="Chase" dist="100"/>
             </group>
         </group>
-        <group type="sel">
-            <behavior type="Idle"/>
-        </group>
+
+        <!-- Not seeing the enemy, idle -->
+        <behavior type="SetImage" id="Idle"/>
     </group>
 </bt>

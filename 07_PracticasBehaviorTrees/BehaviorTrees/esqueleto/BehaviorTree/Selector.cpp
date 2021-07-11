@@ -3,8 +3,8 @@
 
 #include "Conditions/Condition.h"
 
-CSelector::CSelector()
-    : CGroup(), m_currentChild(0) {}
+CSelector::CSelector(CBehaviorTree* _owner)
+    : CGroup(_owner), m_currentChild(0) {}
 
 void CSelector::OnEnter()
 {
@@ -13,28 +13,36 @@ void CSelector::OnEnter()
 
 EStatus CSelector::OnUpdate(float _deltaTime)
 {
-    while (true)
+    if (m_behaviors.size() > 0)
     {
-        if (m_condition)
+        while (true)
         {
-            if (!m_condition->Check())
+            if (m_condition)
+            {
+                if (!m_condition->Check())
+                {
+                    return EStatus::Fail;
+                }
+            }
+            const EStatus childStatus = m_behaviors.at(m_currentChild)->Tick(_deltaTime);
+
+            if (childStatus != EStatus::Fail)
+            {
+                return childStatus;
+            }
+
+            ++m_currentChild;
+
+            if (m_currentChild == static_cast<int>(m_behaviors.size()))
             {
                 return EStatus::Fail;
             }
         }
-        const EStatus childStatus = m_behaviors.at(m_currentChild)->Tick(_deltaTime);
-
-        if (childStatus != EStatus::Fail)
-        {
-            return childStatus;
-        }
-
-        ++m_currentChild;
-
-        if (m_currentChild == static_cast<int>(m_behaviors.size()))
-        {
-            return EStatus::Fail;
-        }
     }
     return EStatus::Invalid;
+}
+
+void CSelector::OnExit()
+{
+    m_currentChild = 0;
 }

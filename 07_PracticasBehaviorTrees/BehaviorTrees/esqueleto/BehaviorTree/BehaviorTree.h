@@ -13,6 +13,7 @@ public:
 
     void Load(const char* _file);
     void Tick(float _deltaTime);
+    Character* GetOwner();
 
 protected:
     CGroup* ReadGroupFromXml(TiXmlElement* _groupElement);

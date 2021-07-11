@@ -1,5 +1,7 @@
 #pragma once
 
+class CBehaviorTree;
+
 enum class EStatus : int8_t
 {
     Invalid,
@@ -11,7 +13,7 @@ enum class EStatus : int8_t
 class CBehavior
 {
 public:
-    CBehavior();
+    CBehavior(CBehaviorTree* _owner);
 
     EStatus Tick(float _deltaTime);
 
@@ -21,4 +23,5 @@ protected:
     virtual void OnExit();
 
     EStatus m_status;
+    CBehaviorTree* m_owner;
 };

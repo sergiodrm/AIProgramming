@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Behavior.h"
 
-CBehavior::CBehavior()
-    : m_status(EStatus::Invalid) {}
+CBehavior::CBehavior(CBehaviorTree* _owner)
+    : m_status(EStatus::Invalid), m_owner(_owner) {}
 
 EStatus CBehavior::Tick(float _deltaTime)
 {

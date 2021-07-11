@@ -5,12 +5,11 @@
 class CSelector : public CGroup
 {
 public:
-    CSelector();
+    CSelector(CBehaviorTree* _owner);
 protected:
     virtual void OnEnter() override;
     virtual EStatus OnUpdate(float _deltaTime) override;
+    virtual void OnExit() override;
 
     int m_currentChild;
-
-    std::vector<CBehavior*> m_behaviors;
 };

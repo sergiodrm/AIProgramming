@@ -125,6 +125,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BehaviorTree\Behavior.cpp" />
+    <ClCompile Include="BehaviorTree\Behaviors\AttackBehavior.cpp" />
+    <ClCompile Include="BehaviorTree\Behaviors\ChaseBehavior.cpp" />
+    <ClCompile Include="BehaviorTree\Behaviors\SetImageBehavior.cpp" />
+    <ClCompile Include="BehaviorTree\Behaviors\WaitBehavior.cpp" />
     <ClCompile Include="BehaviorTree\BehaviorTree.cpp" />
     <ClCompile Include="BehaviorTree\Conditions\AndCondition.cpp" />
     <ClCompile Include="BehaviorTree\Conditions\CheckTargetDistanceCondition.cpp" />
@@ -168,6 +172,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BehaviorTree\Behavior.h" />
+    <ClInclude Include="BehaviorTree\Behaviors\AttackBehavior.h" />
+    <ClInclude Include="BehaviorTree\Behaviors\ChaseBehavior.h" />
+    <ClInclude Include="BehaviorTree\Behaviors\SetImageBehavior.h" />
+    <ClInclude Include="BehaviorTree\Behaviors\WaitBehavior.h" />
     <ClInclude Include="BehaviorTree\BehaviorTree.h" />
     <ClInclude Include="BehaviorTree\Conditions\AndCondition.h" />
     <ClInclude Include="BehaviorTree\Conditions\CheckTargetDistanceCondition.h" />
